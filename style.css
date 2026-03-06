@@ -1,0 +1,16 @@
+/*
+Theme Name: Usi No Sima
+Theme URI: 
+Author: Bz3323766@gmail.com
+Author URI: 
+Description: Custom WordPress theme for Usi No Sima
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: Usi No Sima
+*/
+
+/* Base styles - additional custom CSS can be added here */
+html {
+  margin-top: 0 !important;
+}
