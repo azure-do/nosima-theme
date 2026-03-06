@@ -7,7 +7,19 @@
  */
 
 get_header();
+
+// ニュース（newsカスタム投稿タイプ）の最新3件を取得
+$news_args = array(
+    'post_type'      => 'news',
+    'posts_per_page' => 3,
+    'orderby'        => 'date',
+    'order'          => 'DESC'
+);
+
+
+$news_query = new WP_Query($news_args);
 ?>
+<?php get_template_part('templates/fv-top'); ?>
 <main id="main" class="pt-10 lg:pt-12 xl:pt-18 2xl:pt-20 xl:pb-9">
     <div
         class="lg:max-w-[800px] xl:max-w-[1200px] 2xl:max-w-[1400px] mx-auto flex gap-6 lg:gap-8 xl:gap-10 2xl:gap-[52px]">
@@ -15,7 +27,6 @@ get_header();
             class="hidden w-[100vw] h-[100vh] fixed inset-0 z-30 bg-[#00000075] cursor-pointer transition-opacity duration-300 ease-out">
         </div>
         <?php get_template_part('templates/sidebar'); ?>
-
         <div id="content" class="flex-1 md:max-w-[680px] lg:max-w-full mx-auto">
             <div class="w-full px-7 md:px-0">
                 <div class="flex flex-col items-center gap-1">
@@ -26,46 +37,29 @@ get_header();
                     </h3>
                 </div>
                 <div class="w-full grid mt-6 lg:mt-8 xl:mt-10 border-t border-[#818181]">
-                    <div
-                        class="w-full flex flex-col md:flex-row gap-1 md:gap-2 xl:gap-4 py-4 xl:py-8 border-b border-[#818181]">
-                        <div class="text-[14px] xl:text-[16px] text-[#818181] leading-[1.7] tracking-wide">
-                            <span>2026.2.18 </span>
-                        </div>
-                        <div>
-                            <p
-                                class="text-[14px] xl:text-[16px] text-white leading-[1.4] md:leading-[1.7] tracking-wide hover:underline hover:font-semibold underline-offset-4 cursor-pointer transition">
-                                ★重要なお知らせ★サイトリニューアルに伴う会員サービス終了のお知らせ。
-                                このたび当サイトは、内容の充実と情報発信の強化を目的として、新しいサイトへ移行することとなりました。
-                                詳しい移行時期については改めてご案内いたします
-                            </p>
-                        </div>
-                    </div>
-                    <div
-                        class="w-full flex flex-col md:flex-row gap-1 md:gap-2 xl:gap-4 py-4 xl:py-8 border-b border-[#818181]">
-                        <div class="text-[14px] xl:text-[16px] text-[#818181] leading-[1.7] tracking-wide">
-                            <span>2026.2.11 </span>
-                        </div>
-                        <div>
-                            <p
-                                class="text-[14px] xl:text-[16px] text-white leading-[1.4] md:leading-[1.7] tracking-wide hover:underline hover:font-semibold underline-offset-4 cursor-pointer transition">
-                                ダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキスト
-                            </p>
-                        </div>
-                    </div>
-                    <div
-                        class="w-full flex flex-col md:flex-row gap-1 md:gap-2 xl:gap-4 py-4 xl:py-8 border-b border-[#818181]">
-                        <div class="text-[14px] xl:text-[16px] text-[#818181] leading-[1.7] tracking-wide">
-                            <span>2026.2.1 </span>
-                        </div>
-                        <div>
-                            <p
-                                class="text-[14px] xl:text-[16px] text-white leading-[1.4] md:leading-[1.7] tracking-wide hover:underline hover:font-semibold underline-offset-4 cursor-pointer transition">
-                                ダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキスト
-                            </p>
-                        </div>
-                    </div>
-                    <div class="w-full bg-white">
-                    </div>
+                    <?php if ($news_query->have_posts()) : ?>
+                        <?php while ($news_query->have_posts()) : $news_query->the_post(); ?>
+                            <?php
+                            $post_id = get_the_ID();
+                            $post_date = get_the_date('Y.m.d', $post_id);
+                            $post_title = get_the_title($post_id);
+                            ?>
+                            <a href="<?php echo esc_url(get_permalink($post_id)); ?>">
+                                <div
+                                    class="w-full flex flex-col md:flex-row gap-1 md:gap-2 xl:gap-4 py-4 xl:py-8 border-b border-[#818181]">
+                                    <div class="text-[14px] xl:text-[16px] text-[#818181] leading-[1.7] tracking-wide">
+                                        <span><?php echo $post_date; ?></span>
+                                    </div>
+                                    <div>
+                                        <p
+                                            class="text-[14px] xl:text-[16px] text-white leading-[1.4] md:leading-[1.7] tracking-wide hover:underline hover:font-semibold underline-offset-4 cursor-pointer transition">
+                                            <?php echo $post_title; ?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        <?php endwhile; ?>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="w-full px-7 md:px-0 pt-12 lg:pt-16 xl:pt-20">

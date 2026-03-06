@@ -39,7 +39,7 @@
   <header class="fixed w-full justify-center bg-black z-[100] py-2 lg:py-3 xl:py-4 2xl:py-[15px] px-8 xl:px-12">
     <div class="relative w-full mx-auto flex items-center justify-between">
       <div class="flex items-center shrink-0">
-        <a href="index.html">
+        <a href="<?php echo esc_url(home_url('/')); ?>">
           <img src="<?php echo T_DIRE_URI; ?>/assets/images/logo.webp" alt="ロゴ" class="w-[200px] lg:w-[260px] xl:w-[280px] 2xl:w-[285px]" />
         </a>
       </div>
