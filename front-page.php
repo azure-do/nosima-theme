@@ -61,6 +61,16 @@ $news_query = new WP_Query($news_args);
                         <?php endwhile; ?>
                     <?php endif; ?>
                 </div>
+                <div class="w-full flex justify-center items-center mt-6 lg:mt-8 xl:mt-10">
+                    <a href="<?php echo esc_url(home_url('/news')); ?>">
+                        <button type="button" class="btn-line hover:text-white/70 duration-200 border border-[#818181] bg-black/40 hover:bg-black/80 transition text-white text-[14px] lg:text-[16px] xl:text-[18px] py-2 lg:py-3 xl:py-4 px-3 xl:px-5 flex items-center gap-2">
+                            <span>
+                                お知らせをもっと見る
+                            </span>
+                            <i class="fa-solid fa-chevron-right text-[10px] lg:text-[12px] xl:text-[14px]"></i>
+                        </button>
+                    </a>
+                </div>
             </div>
             <div class="w-full px-7 md:px-0 pt-12 lg:pt-16 xl:pt-20">
                 <div class="flex flex-col items-center gap-1">

@@ -1,3 +1,12 @@
+<?php
+$args = array(
+  'taxonomy' => 'product_category',
+  'hide_empty' => false,
+  'orderby' => 'term_id',
+  'order' => 'ASC',
+);
+$terms = get_terms($args);
+?>
 <div id="sidebar"
   class="fixed lg:static -translate-x-full lg:translate-x-0 w-[200px] h-full top-0 z-40 pt-16 pb-4 lg:py-0 w-[200px] lg:w-[220px] xl:w-[260px] 2xl:w-[280px] bg-black lg:bg-transparent transition-transform duration-300 ease-out">
   <button id="handleSidebarBtn" type="button"
@@ -20,18 +29,22 @@
           class="text-white text-[14px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] font-bold tracking-wide z-10">定番タオル</span>
       </div>
       <ul class="py-3 xl:py-4 flex flex-col gap-3">
-        <li
-          class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer group hover:underline underline-offset-4 transition">
-          <svg class="w-[9px] text-[#b40000] group-hover:hidden" viewBox="0 0 10 16"
-            xmlns="http://www.w3.org/2000/svg">
-            <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-          <img src="<?php echo T_DIRE_URI; ?>/assets/images/mark01.webp" alt="マーク"
-            class="w-[16px] lg:w-[18px] xl:w-[22px] 2xl:w-[24px] hidden pointer-events-none select-none group-hover:opacity-100 opacity-0 group-hover:block transition-opacity duration-300"
-            style="transform: rotateY(180deg);">
-          顔良プリント 50枚 29,400〜
-        </li>
+        <?php foreach ($terms as $term): ?>
+          <?php if ($term->custom_towel_type == 'standard_towel'): ?>
+            <li
+              class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer group hover:underline underline-offset-4 transition">
+              <svg class="w-[9px] text-[#b40000] group-hover:hidden" viewBox="0 0 10 16"
+                xmlns="http://www.w3.org/2000/svg">
+                <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <img src="<?php echo T_DIRE_URI; ?>/assets/images/mark01.webp" alt="マーク"
+                class="w-[16px] lg:w-[18px] xl:w-[22px] 2xl:w-[24px] hidden pointer-events-none select-none group-hover:opacity-100 opacity-0 group-hover:block transition-opacity duration-300"
+                style="transform: rotateY(180deg);">
+              <?php echo $term->name; ?>
+            </li>
+          <?php endif; ?>
+        <?php endforeach; ?>
       </ul>
     </div>
     <div class="flex flex-col">
@@ -40,22 +53,22 @@
           class="text-white text-[14px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] font-bold tracking-wide z-10">SPカラータオル</span>
       </div>
       <ul class="py-3 xl:py-4 flex flex-col gap-3">
-        <li
-          class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer">
-          <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-            <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-          顔良プリント 50枚 35,800〜
-        </li>
-        <li
-          class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer">
-          <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-            <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-          看抜プリント 50枚 39,700〜
-        </li>
+        <?php foreach ($terms as $term): ?>
+          <?php if ($term->custom_towel_type == 'sp_color_towel'): ?>
+            <li
+              class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer group hover:underline underline-offset-4 transition">
+              <svg class="w-[9px] text-[#b40000] group-hover:hidden" viewBox="0 0 10 16"
+                xmlns="http://www.w3.org/2000/svg">
+                <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <img src="<?php echo T_DIRE_URI; ?>/assets/images/mark01.webp" alt="マーク"
+                class="w-[16px] lg:w-[18px] xl:w-[22px] 2xl:w-[24px] hidden pointer-events-none select-none group-hover:opacity-100 opacity-0 group-hover:block transition-opacity duration-300"
+                style="transform: rotateY(180deg);">
+              <?php echo $term->name; ?>
+            </li>
+          <?php endif; ?>
+        <?php endforeach; ?>
       </ul>
     </div>
     <div class="flex flex-col">
@@ -64,58 +77,50 @@
           class="text-white text-[14px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] font-bold tracking-wide z-10">平織りタオル</span>
       </div>
       <ul class="py-3 xl:py-4 flex flex-col gap-3">
-        <li
-          class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer">
-          <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-            <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-          顔良プリント　50枚 46,000〜
-        </li>
-        <li
-          class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer">
-          <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-            <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-          看抜プリント　50枚 50,000〜
-        </li>
-        <li
-          class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer">
-          <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-            <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-              stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-          金・銀プリント　50枚 51,700〜
-        </li>
+        <?php foreach ($terms as $term): ?>
+          <?php if ($term->custom_towel_type == 'flat_weave_towel'): ?>
+            <li
+              class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer group hover:underline underline-offset-4 transition">
+              <svg class="w-[9px] text-[#b40000] group-hover:hidden" viewBox="0 0 10 16"
+                xmlns="http://www.w3.org/2000/svg">
+                <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <img src="<?php echo T_DIRE_URI; ?>/assets/images/mark01.webp" alt="マーク"
+                class="w-[16px] lg:w-[18px] xl:w-[22px] 2xl:w-[24px] hidden pointer-events-none select-none group-hover:opacity-100 opacity-0 group-hover:block transition-opacity duration-300"
+                style="transform: rotateY(180deg);">
+              <?php echo $term->name; ?>
+            </li>
+          <?php endif; ?>
+        <?php endforeach; ?>
       </ul>
     </div>
     <div class="flex flex-col pt-4">
       <div
         class="flex items-center justify-between bg-gradient-to-r from-[#a50000] to-[#5f0000] py-1 px-6 relative">
         <span
-          class="text-white text-[16px] lg:text-[18px] xl:text-[20px] xl:text-[22px] font-bold tracking-wide z-10">闘牛タオル</span>
+          class="text-white text-[16px] lg:text-[18px] xl:text-[20px] xl:text-[22px] font-bold tracking-wide z-10">応援グッズ</span>
         <img src="<?php echo T_DIRE_URI; ?>/assets/images/mark00.webp" alt="牛のシルエット"
           class="hidden md:block w-[60px] lg:w-[70px] xl:w-[80px] 2xl:w-[90px] pointer-events-none select-none">
       </div>
       <div class="flex flex-col">
         <ul class="py-3 xl:py-4 flex flex-col gap-3">
-          <li
-            class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer">
-            <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-              <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            ハッピ
-          </li>
-          <li
-            class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer">
-            <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-              <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            のぼり
-          </li>
+          <?php foreach ($terms as $term): ?>
+            <?php if ($term->custom_towel_type == 'cheering_goods'): ?>
+              <li
+                class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer group hover:underline underline-offset-4 transition">
+                <svg class="w-[9px] text-[#b40000] group-hover:hidden" viewBox="0 0 10 16"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <img src="<?php echo T_DIRE_URI; ?>/assets/images/mark01.webp" alt="マーク"
+                  class="w-[16px] lg:w-[18px] xl:w-[22px] 2xl:w-[24px] hidden pointer-events-none select-none group-hover:opacity-100 opacity-0 group-hover:block transition-opacity duration-300"
+                  style="transform: rotateY(180deg);">
+                <?php echo $term->name; ?>
+              </li>
+            <?php endif; ?>
+          <?php endforeach; ?>
         </ul>
       </div>
     </div>
@@ -129,54 +134,22 @@
       </div>
       <div class="flex flex-col">
         <ul class="py-3 xl:py-4 flex flex-col gap-3">
-          <li
-            class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer">
-            <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-              <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            ガウン
-          </li>
-          <li
-            class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer">
-            <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-              <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            マフラー
-          </li>
-          <li
-            class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer">
-            <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-              <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            面綱
-          </li>
-          <li
-            class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer">
-            <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-              <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            顔飾り
-          </li>
-          <li
-            class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer">
-            <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-              <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            角巻き
-          </li>
-          <li
-            class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer">
-            <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-              <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            一式セット
-          </li>
+          <?php foreach ($terms as $term): ?>
+            <?php if ($term->custom_towel_type == 'victory_costume'): ?>
+              <li
+                class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer group hover:underline underline-offset-4 transition">
+                <svg class="w-[9px] text-[#b40000] group-hover:hidden" viewBox="0 0 10 16"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <img src="<?php echo T_DIRE_URI; ?>/assets/images/mark01.webp" alt="マーク"
+                  class="w-[16px] lg:w-[18px] xl:w-[22px] 2xl:w-[24px] hidden pointer-events-none select-none group-hover:opacity-100 opacity-0 group-hover:block transition-opacity duration-300"
+                  style="transform: rotateY(180deg);">
+                <?php echo $term->name; ?>
+              </li>
+            <?php endif; ?>
+          <?php endforeach; ?>
         </ul>
       </div>
     </div>
