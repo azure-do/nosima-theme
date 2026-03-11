@@ -10,10 +10,10 @@ get_header();
 
 $products_view = isset($_GET['view']) && $_GET['view'] === 'list' ? 'list' : 'grid';
 $products = get_posts(array(
-    'post_type' => 'products',
+    'post_type'      => 'products',
+    'posts_per_page' => -1,
 ));
 
-print_r($products);
 ?>
 
 <main id="main" class="pt-10 lg:pt-12 xl:pt-18 2xl:pt-20 xl:pb-9">
@@ -30,21 +30,18 @@ print_r($products);
                 <div id="products-list-view"
                     class="products-view-list w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-x-4 md:gap-x-6 lg:gap-x-8 gap-y-5 lg:gap-y-10 xl:gap-y-12 mt-6 lg:mt-8 xl:mt-10<?php echo $products_view !== 'list' ? ' hidden' : ''; ?>">
                     <?php foreach ($products as $product) : ?>
-                        <?php get_template_part('templates/product-list-card');  ?>
+                        <?php get_template_part('templates/product-list-card', null, array('product' => $product)); ?>
                     <?php endforeach; ?>
                 </div>
                 <!-- Grid view -->
                 <div id="products-grid-view"
                     class="products-view-grid w-full grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-4 md:gap-x-6 lg:gap-x-8 gap-y-5 lg:gap-y-10 xl:gap-y-12 mt-6 lg:mt-8 xl:mt-10<?php echo $products_view !== 'grid' ? ' hidden' : ''; ?>">
                     <?php foreach ($products as $product) : ?>
-                        <!-- <?php get_template_part('templates/product-grid-card', $product); ?> -->
-                         <h1>test</h1>
+                        <?php get_template_part('templates/product-grid-card', null, array('product' => $product)); ?>
                     <?php endforeach; ?>
                 </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
 </main>
 
