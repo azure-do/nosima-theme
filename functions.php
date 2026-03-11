@@ -116,6 +116,24 @@ add_filter('manage_product_category_custom_column', 'nosima_product_category_cus
 
 // =========== [ NEW CODE BELOW ] =============
 
+/**
+ * Extract image URLs (src values) from HTML string containing img tags.
+ * Useful when ACF WYSIWYG or similar stores multiple images as HTML.
+ *
+ * @param string $html HTML string (e.g. from ACF WYSIWYG field).
+ * @return string[] Array of image URL strings.
+ */
+function nosima_get_image_urls_from_html( $html ) {
+  if ( empty( $html ) || ! is_string( $html ) ) {
+    return array();
+  }
+  $urls = array();
+  if ( preg_match_all( '/<img[^>]+src=(["\'])([^"\']+)\1/', $html, $matches ) ) {
+    $urls = $matches[2];
+  }
+  return $urls;
+}
+
 // Make custom towel type available to the frontend (e.g. sidebar.php)
 // Usage: $term->custom_towel_type will be populated
 add_filter('get_terms', function ($terms, $taxonomies, $args, $term_query) {

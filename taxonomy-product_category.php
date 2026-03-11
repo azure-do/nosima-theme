@@ -6,11 +6,14 @@ $term = get_queried_object();
 
 // View mode (?view=list | ?view=grid) - same behavior as archive-products.php
 $products_view = (isset($_GET['view']) && $_GET['view'] === 'list') ? 'list' : 'grid';
+$products_sort = isset($_GET['sort']) ? sanitize_text_field(wp_unslash($_GET['sort'])) : '';
+$products_find = isset($_GET['find']) ? sanitize_text_field(wp_unslash($_GET['find'])) : '';
 
 // Products in this taxonomy term
-$products = get_posts(array(
+$products_args = array(
   'post_type'      => 'products',
   'posts_per_page' => -1,
+  'post_status'    => 'publish',
   'tax_query'      => array(
     array(
       'taxonomy' => $term->taxonomy,
@@ -18,7 +21,35 @@ $products = get_posts(array(
       'terms'    => $term->term_id,
     ),
   ),
-));
+);
+if ($products_find !== '') {
+  $products_args['s'] = $products_find;
+}
+switch ($products_sort) {
+  case 'new':
+    $products_args['orderby'] = 'date';
+    $products_args['order'] = 'DESC';
+    break;
+  case 'popular':
+    $products_args['orderby'] = 'comment_count';
+    $products_args['order'] = 'DESC';
+    break;
+  case 'price_asc':
+    $products_args['orderby'] = 'meta_value_num';
+    $products_args['meta_key'] = 'product_price';
+    $products_args['order'] = 'ASC';
+    $products_args['meta_type'] = 'NUMERIC';
+    break;
+  case 'price_desc':
+    $products_args['orderby'] = 'meta_value_num';
+    $products_args['meta_key'] = 'product_price';
+    $products_args['order'] = 'DESC';
+    $products_args['meta_type'] = 'NUMERIC';
+    break;
+  default:
+    break;
+}
+$products = get_posts($products_args);
 ?>
 
 <main id="main" class="pt-10 lg:pt-12 xl:pt-18 2xl:pt-20 xl:pb-9">
@@ -30,9 +61,9 @@ $products = get_posts(array(
     <?php get_template_part('templates/sidebar'); ?>
     <div id="content" class="flex-1 md:max-w-[680px] lg:max-w-full mx-auto">
       <div class="w-full px-7 md:px-0">
-        <h1 class="text-white text-[20px] lg:text-[24px] xl:text-[28px] font-bold mb-2">
+        <!-- <h1 class="text-white text-[20px] lg:text-[24px] xl:text-[28px] font-bold mb-2">
           <?php echo esc_html($term->name); ?>
-        </h1>
+        </h1> -->
         <?php get_template_part('templates/product-header'); ?>
         <!-- おすすめ商品 - List view -->
         <div id="products-list-view"

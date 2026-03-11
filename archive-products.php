@@ -9,10 +9,42 @@
 get_header();
 
 $products_view = isset($_GET['view']) && $_GET['view'] === 'list' ? 'list' : 'grid';
-$products = get_posts(array(
+$products_sort = isset($_GET['sort']) ? sanitize_text_field(wp_unslash($_GET['sort'])) : '';
+$products_find = isset($_GET['find']) ? sanitize_text_field(wp_unslash($_GET['find'])) : '';
+
+$products_args = array(
     'post_type'      => 'products',
     'posts_per_page' => -1,
-));
+    'post_status'    => 'publish',
+);
+if ($products_find !== '') {
+    $products_args['s'] = $products_find;
+}
+switch ($products_sort) {
+    case 'new':
+        $products_args['orderby'] = 'date';
+        $products_args['order'] = 'DESC';
+        break;
+    case 'popular':
+        $products_args['orderby'] = 'comment_count';
+        $products_args['order'] = 'DESC';
+        break;
+    case 'price_asc':
+        $products_args['orderby'] = 'meta_value_num';
+        $products_args['meta_key'] = 'product_price';
+        $products_args['order'] = 'ASC';
+        $products_args['meta_type'] = 'NUMERIC';
+        break;
+    case 'price_desc':
+        $products_args['orderby'] = 'meta_value_num';
+        $products_args['meta_key'] = 'product_price';
+        $products_args['order'] = 'DESC';
+        $products_args['meta_type'] = 'NUMERIC';
+        break;
+    default:
+        break;
+}
+$products = get_posts($products_args);
 
 ?>
 

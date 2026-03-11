@@ -52,7 +52,7 @@ $next_post = get_next_post();
           <div class="flex flex-col lg:flex-row gap-8">
             <div class="flex-1 pt-4 lg:pt-0 flex flex-col gap-4">
               <h2 class="text-white text-[20px] lg:text-[24px] xl:text-[28px] font-bold mb-1"><?php echo $post_title; ?></h2>
-              <div class="news-wysiwyg text-white text-[14px] lg:text-[16px] xl:text-[18px] leading-relaxed space-y-2">
+              <div class="nosima-wysiwyg text-white text-[14px] lg:text-[16px] xl:text-[18px] leading-relaxed space-y-2">
                 <?php echo wp_kses_post($post_content); ?>
               </div>
             </div>
