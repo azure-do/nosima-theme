@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     AOS.init();
   }
 
-  // -------------------------  SWIPER  -----------------------------------
+  // -------------------------  Top FV Swiper  -----------------------------------
 
   let topFvSwiper;
   topFvSwiper = new Swiper(".swiper-fv-top", {
@@ -24,34 +24,52 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   });
 
-  // Testimonial Swiper
-  let testimonialSwiper = new Swiper(".swiper-testimonial", {
-    slidesPerView: 3,
-    spaceBetween: 20,
+  // -------------------------  Product Detail Swiper  -----------------------------------
+  const thumbSwiperEl = document.querySelector('.thumbImageSwiper');
+  const mainSwiperEl = document.querySelector('.mainImageSwiper');
+  if (thumbSwiperEl && mainSwiperEl) {
+    var thumbSwiper = new Swiper('.thumbImageSwiper', {
+      slidesPerView: 4,
+      spaceBetween: 8,
+      watchSlidesProgress: true,
+      breakpoints: {
+        640: {
+          slidesPerView: 4
+        },
+        1024: {
+          slidesPerView: 6
+        },
+      },
+    });
+    var mainSwiper = new Swiper('.mainImageSwiper', {
+      spaceBetween: 10,
+      loop: true,
+      // autoplay: {
+      //   delay: 2500,
+      //   disableOnInteraction: false,
+      // },
+      speed: 1000,
+      thumbs: {
+        swiper: thumbSwiper
+      }
+    });
+  }
+
+  // -------------------------  Related Products Swiper  -----------------------------------
+
+  const relatedProductsSwiper = new Swiper('#productImageSlider', {
     loop: true,
+    zoom: true,
+    slidesPerView: 8,
+    spaceBetween: 8,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
     autoplay: {
       delay: 2500,
     },
-    breakpoints: {
-      1024: {
-        slidesPerView: 3,
-      },
-      768: {
-        slidesPerView: 2,
-      },
-      480: {
-        slidesPerView: 1,
-      },
-      320: {
-        slidesPerView: 1.3,
-        centeredSlides: true,
-        spaceBetween: 10,
-      },
-    },
-    navigation: {
-      nextEl: ".testimonial-button-next",
-      prevEl: ".testimonial-button-prev",
-    },
+    speed: 600,
   });
 
   // -------------------------  Others  -----------------------------------
@@ -85,101 +103,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Initial check
     toggleScrollToTopButton();
   }
-
-  // ------------------------------------------------------------
-
-  // ------------------------------------------------------------
-
-  const hamburgerBtn = document.getElementById("hamburgerBtn");
-  const menu_modal = document.getElementById("menu_modal");
-  const closeMenuBtn = document.getElementById("closeMenuBtn");
-
-  if (closeMenuBtn) {
-    closeMenuBtn.addEventListener("click", toggleModal);
-  }
-
-  function toggleModal() {
-    if (menu_modal.classList.contains("opacity-0")) {
-      // open
-      menu_modal.classList.remove("pointer-events-none", "opacity-0");
-      menu_modal.classList.add("pointer-events-auto", "opacity-100");
-    } else {
-      // close
-      menu_modal.classList.add("opacity-0");
-      menu_modal.classList.remove("opacity-100", "pointer-events-auto");
-      menu_modal.classList.add("pointer-events-none");
-      document.body.style.overflow = "";
-    }
-  }
-
-  if (hamburgerBtn) {
-    hamburgerBtn.addEventListener("click", toggleModal);
-  }
-
-  // Close modal when any in-modal anchor link is clicked (anchor navigation will then work)
-  const menuModalLinks = menu_modal ? menu_modal.querySelectorAll('a[href^="#"]') : [];
-  menuModalLinks.forEach(function (link) {
-    link.addEventListener("click", function () {
-      if (!menu_modal.classList.contains("opacity-0")) {
-        toggleModal();
-      }
-    });
-  });
-
-  document.addEventListener("keydown", function (e) {
-    if (
-      (e.key === "Escape" || e.key === "Esc") &&
-      !menu_modal.classList.contains("opacity-0")
-    ) {
-      toggleModal();
-    }
-  });
-
-  // -------------------------  Nav active state (anchor links + scroll)  --------
-  const navLinks = document.querySelectorAll('.nav-link[data-nav]');
-  const sectionIds = ['home', 'concept', 'room', 'menu', 'item', 'access', 'qa'];
-
-  function setActiveNav(id) {
-    navLinks.forEach(function (link) {
-      if (link.getAttribute('data-nav') === id) {
-        link.classList.add('nav-active');
-      } else {
-        link.classList.remove('nav-active');
-      }
-    });
-  }
-
-  function updateActiveFromHash() {
-    const hash = window.location.hash.slice(1);
-    if (hash && sectionIds.includes(hash)) {
-      setActiveNav(hash);
-      return true;
-    }
-    return false;
-  }
-
-  if (updateActiveFromHash()) {
-  } else {
-    setActiveNav('home');
-  }
-
-  window.addEventListener('hashchange', updateActiveFromHash);
-
-  // Intersection Observer: set active nav from scroll position (which section is in view)
-  const headerOffset = 120;
-  const observerOptions = { root: null, rootMargin: `-${headerOffset}px 0px -60% 0px`, threshold: 0 };
-  const observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      const id = entry.target.id;
-      if (sectionIds.includes(id)) setActiveNav(id);
-    });
-  }, observerOptions);
-
-  sectionIds.forEach(function (id) {
-    const el = document.getElementById(id);
-    if (el) observer.observe(el);
-  });
 
   // -------------------------  Search form (mobile)  -----------------------------------
   const searchBtn = document.getElementById("searchBtn");
@@ -234,4 +157,58 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (handleSidebarBtn) handleSidebarBtn.addEventListener("click", toggleSidebar);
   if (overlay) overlay.addEventListener("click", closeSidebar);
+
+  // ------------- Image Zoom on Hover for .zoomable --------------
+  const zoomable = document.querySelectorAll('.zoomable');
+
+  zoomable.forEach(item => {
+    let lens = null;
+
+    // Create the lens and append to body on mouseenter
+    item.addEventListener('mouseenter', e => {
+      lens = document.createElement("span");
+      lens.classList.add('zoom-lens');
+      lens.style.position = 'absolute';
+      lens.style.pointerEvents = 'none';
+      lens.style.width = '120px';
+      lens.style.height = '120px';
+      lens.style.borderRadius = '50%';
+      lens.style.boxShadow = '0 0 8px 1px rgba(0,0,0,0.25)';
+      lens.style.border = '2px solid #fff';
+      lens.style.zIndex = '9999';
+      lens.style.backgroundImage = `url('${item.src}')`;
+      lens.style.backgroundRepeat = 'no-repeat';
+      lens.style.backgroundSize = (item.width * 2) + "px";
+      document.body.appendChild(lens);
+    });
+
+    // Move the lens
+    item.addEventListener('mousemove', e => {
+      if (!lens) return;
+      let rect = item.getBoundingClientRect();
+      let zoom = 2;
+      let lensWidth = lens.offsetWidth;
+      let lensHeight = lens.offsetHeight;
+      let pageX = e.pageX;
+      let pageY = e.pageY;
+
+      // Position the lens centered to the mouse
+      lens.style.left = (pageX - lensWidth / 2) + 'px';
+      lens.style.top = (pageY - lensHeight / 2) + 'px';
+
+      // Compute background position relative to image
+      let x = pageX - rect.left - window.pageXOffset;
+      let y = pageY - rect.top - window.pageYOffset;
+      lens.style.backgroundSize = (item.width * zoom) + "px";
+      lens.style.backgroundPosition = `-${(x * zoom - lensWidth / 2)}px -${(y * zoom - lensHeight / 2)}px`;
+    });
+
+    // Remove lens on mouseleave
+    item.addEventListener('mouseleave', e => {
+      if (lens && lens.parentNode) {
+        lens.parentNode.removeChild(lens);
+        lens = null;
+      }
+    });
+  });
 });

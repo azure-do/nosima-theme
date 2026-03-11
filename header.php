@@ -16,6 +16,7 @@
   <script src="<?php echo T_DIRE_URI; ?>/assets/css/tailwind.css"></script>
   <script src="<?php echo T_DIRE_URI; ?>/assets/js/swiper-bundle.min.js"></script>
   <script src="<?php echo T_DIRE_URI; ?>/assets/js/aos.js"></script>
+  <script src="<?php echo T_DIRE_URI; ?>/assets/js/main.js"></script>
   <style>
     @media (max-width: 1023px) {
       #searchForm.searchForm--open {
