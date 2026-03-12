@@ -6,6 +6,12 @@ $args = array(
   'order' => 'ASC',
 );
 $terms = get_terms($args);
+// Preserve product list query (view, sort, find) when switching categories
+$product_query_preserve = array_filter(array(
+  'view'  => isset($_GET['view']) ? sanitize_text_field(wp_unslash($_GET['view'])) : '',
+  'sort'  => isset($_GET['sort']) ? sanitize_text_field(wp_unslash($_GET['sort'])) : '',
+  'find'  => isset($_GET['find']) ? sanitize_text_field(wp_unslash($_GET['find'])) : '',
+));
 ?>
 <div id="sidebar"
   class="fixed lg:static -translate-x-full lg:translate-x-0 w-[200px] h-full top-0 z-40 pt-16 pb-4 lg:py-0 w-[200px] lg:w-[220px] xl:w-[260px] 2xl:w-[280px] bg-black lg:bg-transparent transition-transform duration-300 ease-out">
@@ -31,7 +37,14 @@ $terms = get_terms($args);
       <ul class="py-3 xl:py-4 flex flex-col gap-3">
         <?php foreach ($terms as $term): ?>
           <?php if ($term->custom_towel_type == 'standard_towel'): ?>
-            <a href="<?php echo get_term_link($term); ?>">
+            <?php
+              $term_url = get_term_link($term);
+              if (!is_wp_error($term_url) && !empty($product_query_preserve)) {
+                $term_url = add_query_arg($product_query_preserve, $term_url);
+              }
+              $term_url = is_wp_error($term_url) ? '#' : $term_url;
+              ?>
+            <a href="<?php echo esc_url($term_url); ?>">
               <li
                 class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer group hover:underline underline-offset-4 transition">
                 <svg class="w-[9px] text-[#b40000] group-hover:hidden" viewBox="0 0 10 16"
@@ -57,7 +70,14 @@ $terms = get_terms($args);
       <ul class="py-3 xl:py-4 flex flex-col gap-3">
         <?php foreach ($terms as $term): ?>
           <?php if ($term->custom_towel_type == 'sp_color_towel'): ?>
-            <a href="<?php echo get_term_link($term); ?>">
+            <?php
+              $term_url = get_term_link($term);
+              if (!is_wp_error($term_url) && !empty($product_query_preserve)) {
+                $term_url = add_query_arg($product_query_preserve, $term_url);
+              }
+              $term_url = is_wp_error($term_url) ? '#' : $term_url;
+              ?>
+            <a href="<?php echo esc_url($term_url); ?>">
               <li
                 class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer group hover:underline underline-offset-4 transition">
                 <svg class="w-[9px] text-[#b40000] group-hover:hidden" viewBox="0 0 10 16"
@@ -83,7 +103,14 @@ $terms = get_terms($args);
       <ul class="py-3 xl:py-4 flex flex-col gap-3">
         <?php foreach ($terms as $term): ?>
           <?php if ($term->custom_towel_type == 'flat_weave_towel'): ?>
-            <a href="<?php echo get_term_link($term); ?>">
+            <?php
+              $term_url = get_term_link($term);
+              if (!is_wp_error($term_url) && !empty($product_query_preserve)) {
+                $term_url = add_query_arg($product_query_preserve, $term_url);
+              }
+              $term_url = is_wp_error($term_url) ? '#' : $term_url;
+              ?>
+            <a href="<?php echo esc_url($term_url); ?>">
               <li
                 class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer group hover:underline underline-offset-4 transition">
                 <svg class="w-[9px] text-[#b40000] group-hover:hidden" viewBox="0 0 10 16"
@@ -113,7 +140,14 @@ $terms = get_terms($args);
         <ul class="py-3 xl:py-4 flex flex-col gap-3">
           <?php foreach ($terms as $term): ?>
             <?php if ($term->custom_towel_type == 'cheering_goods'): ?>
-              <a href="<?php echo get_term_link($term); ?>">
+              <?php
+              $term_url = get_term_link($term);
+              if (!is_wp_error($term_url) && !empty($product_query_preserve)) {
+                $term_url = add_query_arg($product_query_preserve, $term_url);
+              }
+              $term_url = is_wp_error($term_url) ? '#' : $term_url;
+              ?>
+            <a href="<?php echo esc_url($term_url); ?>">
                 <li
                   class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer group hover:underline underline-offset-4 transition">
                   <svg class="w-[9px] text-[#b40000] group-hover:hidden" viewBox="0 0 10 16"
@@ -144,7 +178,14 @@ $terms = get_terms($args);
         <ul class="py-3 xl:py-4 flex flex-col gap-3">
           <?php foreach ($terms as $term): ?>
             <?php if ($term->custom_towel_type == 'victory_costume'): ?>
-              <a href="<?php echo get_term_link($term); ?>">
+              <?php
+              $term_url = get_term_link($term);
+              if (!is_wp_error($term_url) && !empty($product_query_preserve)) {
+                $term_url = add_query_arg($product_query_preserve, $term_url);
+              }
+              $term_url = is_wp_error($term_url) ? '#' : $term_url;
+              ?>
+            <a href="<?php echo esc_url($term_url); ?>">
                 <li
                   class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer group hover:underline underline-offset-4 transition">
                   <svg class="w-[9px] text-[#b40000] group-hover:hidden" viewBox="0 0 10 16"

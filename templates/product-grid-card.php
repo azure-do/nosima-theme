@@ -21,7 +21,7 @@ if (empty($product) || !is_object($product)) {
     if (!$img_url) {
       $img_url = (defined('T_DIRE_URI') ? T_DIRE_URI : get_template_directory_uri()) . '/assets/images/default-product.png';
     }
-    $price = get_field('product_price', $pid);
+    $price = get_field('product_price_label', $pid);
     ?>
     <div class="w-fit overflow-hidden">
       <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($product->post_title); ?>"

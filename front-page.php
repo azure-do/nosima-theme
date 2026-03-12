@@ -8,17 +8,30 @@
 
 get_header();
 
+$products_view = isset($_GET['view']) && $_GET['view'] === 'list' ? 'list' : 'grid';
+
 // ニュース（newsカスタム投稿タイプ）の最新3件を取得
 $news_args = array(
     'post_type'      => 'news',
     'posts_per_page' => 3,
     'orderby'        => 'date',
-    'order'          => 'DESC'
+    'post_status'    => 'publish',
+    'order'          => 'DESC',
+);
+$recommended_products_args = array(
+    'post_type'      => 'products',
+    'posts_per_page' => -1,
+    'post_status'    => 'publish',
 );
 
-
 $news_query = new WP_Query($news_args);
+$recommended_products_query = new WP_Query($recommended_products_args);
+
 ?>
+
+<?php print_r($news_query) ?>
+<?php print_r($recommended_products_query) ?>
+
 <?php get_template_part('templates/fv-top'); ?>
 <main id="main" class="pt-10 lg:pt-12 xl:pt-18 2xl:pt-20 xl:pb-9">
     <div
@@ -79,96 +92,25 @@ $news_query = new WP_Query($news_args);
                     <h3 class="text-[24px] lg:text-[28px] xl:text-[32px] 2xl:text-[36px] text-white font-medium tracking-wide">
                         おすすめ商品</h3>
                 </div>
+                <!-- <div class="flex flex-col gap-4 group cursor-pointer">
+                    <div class="w-fit overflow-hidden">
+                        <img src="<?php echo T_DIRE_URI; ?>/assets/images/recommended01.webp" alt="商品画像"
+                            class="w-full h-auto group-hover:scale-105 transition">
+                    </div>
+                    <div class="flex flex-col gap-2 text-white text-[12px] lg:text-[14px]">
+                        <span class="group-hover:underline underline-offset-4 group-hover:font-semibold transition">定番 白タオル
+                            顔料プリント 10枚</span>
+                        <span>17,500円～(税込)</span>
+                    </div>
+                </div> -->
                 <div
                     class="w-full grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 md:gap-x-6 lg:gap-x-8 gap-y-8 lg:gap-y-10 xl:gap-y-12 mt-6 lg:mt-8 xl:mt-10">
-                    <div class="flex flex-col gap-4 group cursor-pointer">
-                        <div class="w-fit overflow-hidden">
-                            <img src="<?php echo T_DIRE_URI; ?>/assets/images/recommended01.webp" alt="商品画像"
-                                class="w-full h-auto group-hover:scale-105 transition">
-                        </div>
-                        <div class="flex flex-col gap-2 text-white text-[12px] lg:text-[14px]">
-                            <span class="group-hover:underline underline-offset-4 group-hover:font-semibold transition">定番 白タオル
-                                顔料プリント 10枚</span>
-                            <span>17,500円～(税込)</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-4 group cursor-pointer">
-                        <div class="w-fit overflow-hidden">
-                            <img src="<?php echo T_DIRE_URI; ?>/assets/images/recommended02.webp" alt="商品画像"
-                                class="w-full h-auto group-hover:scale-105 transition">
-                        </div>
-                        <div class="flex flex-col gap-2 text-white text-[12px] lg:text-[14px]">
-                            <span class="group-hover:underline underline-offset-4 group-hover:font-semibold transition">定番 白タオル
-                                顔料プリント 10枚</span>
-                            <span>17,500円～(税込)</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-4 group cursor-pointer">
-                        <div class="w-fit overflow-hidden">
-                            <img src="<?php echo T_DIRE_URI; ?>/assets/images/recommended03.webp" alt="商品画像"
-                                class="w-full h-auto group-hover:scale-105 transition">
-                        </div>
-                        <div class="flex flex-col gap-2 text-white text-[12px] lg:text-[14px]">
-                            <span class="group-hover:underline underline-offset-4 group-hover:font-semibold transition">定番 白タオル
-                                顔料プリント 10枚</span>
-                            <span>17,500円～(税込)</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-4 group cursor-pointer">
-                        <div class="w-fit overflow-hidden">
-                            <img src="<?php echo T_DIRE_URI; ?>/assets/images/recommended04.webp" alt="商品画像"
-                                class="w-full h-auto group-hover:scale-105 transition">
-                        </div>
-                        <div class="flex flex-col gap-2 text-white text-[12px] lg:text-[14px]">
-                            <span class="group-hover:underline underline-offset-4 group-hover:font-semibold transition">定番 白タオル
-                                顔料プリント 10枚</span>
-                            <span>17,500円～(税込)</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-4 group cursor-pointer">
-                        <div class="w-fit overflow-hidden">
-                            <img src="<?php echo T_DIRE_URI; ?>/assets/images/recommended05.webp" alt="商品画像"
-                                class="w-full h-auto group-hover:scale-105 transition">
-                        </div>
-                        <div class="flex flex-col gap-2 text-white text-[12px] lg:text-[14px]">
-                            <span class="group-hover:underline underline-offset-4 group-hover:font-semibold transition">定番 白タオル
-                                顔料プリント 10枚</span>
-                            <span>17,500円～(税込)</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-4 group cursor-pointer">
-                        <div class="w-fit overflow-hidden">
-                            <img src="<?php echo T_DIRE_URI; ?>/assets/images/recommended06.webp" alt="商品画像"
-                                class="w-full h-auto group-hover:scale-105 transition">
-                        </div>
-                        <div class="flex flex-col gap-2 text-white text-[12px] lg:text-[14px]">
-                            <span class="group-hover:underline underline-offset-4 group-hover:font-semibold transition">定番 白タオル
-                                顔料プリント 10枚</span>
-                            <span>17,500円～(税込)</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-4 group cursor-pointer">
-                        <div class="w-fit overflow-hidden">
-                            <img src="<?php echo T_DIRE_URI; ?>/assets/images/recommended07.webp" alt="商品画像"
-                                class="w-full h-auto group-hover:scale-105 transition">
-                        </div>
-                        <div class="flex flex-col gap-2 text-white text-[12px] lg:text-[14px]">
-                            <span class="group-hover:underline underline-offset-4 group-hover:font-semibold transition">定番 白タオル
-                                顔料プリント 10枚</span>
-                            <span>17,500円～(税込)</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-4 group cursor-pointer">
-                        <div class="w-fit overflow-hidden">
-                            <img src="<?php echo T_DIRE_URI; ?>/assets/images/recommended08.webp" alt="商品画像"
-                                class="w-full h-auto group-hover:scale-105 transition">
-                        </div>
-                        <div class="flex flex-col gap-2 text-white text-[12px] lg:text-[14px]">
-                            <span class="group-hover:underline underline-offset-4 group-hover:font-semibold transition">定番 白タオル
-                                顔料プリント 10枚</span>
-                            <span>17,500円～(税込)</span>
-                        </div>
-                    </div>
+                    <?php if ($recommended_products_query->have_posts()) : ?>
+                        <?php while ($recommended_products_query->have_posts()) : $recommended_products_query->the_post(); ?>
+                            <!-- <?php get_template_part('templates/product-grid-card', null, array('product' => $recommended_products_query->the_post())); ?> -->
+                             <h1>test</h1>
+                        <?php endwhile; ?>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="w-full pt-12 lg:pt-16 xl:pt-20">

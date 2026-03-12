@@ -18,7 +18,7 @@ $product_sub_img = get_field('product_sub_img', $product_id);
 $product_sub_img_urls = nosima_get_image_urls_from_html($product_sub_img);
 
 $product_date = get_the_date('Y.m.d', $product_id);
-$product_price = get_field('product_price', $product_id);
+$product_price = get_field('product_price_label', $product_id);
 
 $prev_product = get_previous_post();
 $next_product = get_next_post();

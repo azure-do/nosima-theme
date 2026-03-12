@@ -15,7 +15,7 @@ if (is_array($product_img) && !empty($product_img['url'])) {
   $img_url = get_the_post_thumbnail_url($pid);
 }
 $img_url = $img_url ?: '';
-$price = get_field('product_price', $pid);
+$price = get_field('product_price_label', $pid);
 ?>
 <a href="<?php echo esc_url(get_permalink($product->ID)); ?>">
   <div class="flex flex-row gap-4 xl:gap-6 group cursor-pointer">
