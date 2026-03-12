@@ -30,9 +30,14 @@ $recommended_products_args = array(
         ),
     ),
 );
+$history_args = array(
+    'post_type'      => 'history',
+    'post_status'    => 'publish',
+);
 
 $news_query = new WP_Query($news_args);
 $recommended_products_query = new WP_Query($recommended_products_args);
+$history_query = new WP_Query($history_args);
 
 ?>
 
@@ -116,94 +121,24 @@ $recommended_products_query = new WP_Query($recommended_products_args);
                 </div>
                 <div
                     class="w-full grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-6 lg:mt-8 xl:mt-10 p-4 lg:p-6 xl:p-10 bg-[url('<?php echo T_DIRE_URI; ?>/assets/images/bg-product-example.webp')] bg-cover bg-center">
-                    <button
-                        class="flex items-center gap-2 xl:gap-3 text-white text-[12px] lg:text-[14px] xl:text-[16px] py-2 lg:py-4 xl:py-6 px-3 xl:px-5 border border-[#818181] bg-black/40 hover:bg-black/80 transition">
-                        <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-                            <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        闘牛タオル 2025年
-                    </button>
-                    <button
-                        class="flex items-center gap-2 xl:gap-3 text-white text-[12px] lg:text-[14px] xl:text-[16px] py-2 lg:py-4 xl:py-6 px-3 xl:px-5 border border-[#818181] bg-black/40 hover:bg-black/80 transition">
-                        <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-                            <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        闘牛タオル 2024年
-                    </button>
-                    <button
-                        class="flex items-center gap-2 xl:gap-3 text-white text-[12px] lg:text-[14px] xl:text-[16px] py-2 lg:py-4 xl:py-6 px-3 xl:px-5 border border-[#818181] bg-black/40 hover:bg-black/80 transition">
-                        <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-                            <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        闘牛タオル 2023年
-                    </button>
-                    <button
-                        class="flex items-center gap-2 xl:gap-3 text-white text-[12px] lg:text-[14px] xl:text-[16px] py-2 lg:py-4 xl:py-6 px-3 xl:px-5 border border-[#818181] bg-black/40 hover:bg-black/80 transition">
-                        <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-                            <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        闘牛タオル 2022年
-                    </button>
-                    <button
-                        class="flex items-center gap-2 xl:gap-3 text-white text-[12px] lg:text-[14px] xl:text-[16px] py-2 lg:py-4 xl:py-6 px-3 xl:px-5 border border-[#818181] bg-black/40 hover:bg-black/80 transition">
-                        <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-                            <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        闘牛タオル 2021年
-                    </button>
-                    <button
-                        class="flex items-center gap-2 xl:gap-3 text-white text-[12px] lg:text-[14px] xl:text-[16px] py-2 lg:py-4 xl:py-6 px-3 xl:px-5 border border-[#818181] bg-black/40 hover:bg-black/80 transition">
-                        <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-                            <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        闘牛タオル 2020年
-                    </button>
-                    <button
-                        class="flex items-center gap-2 xl:gap-3 text-white text-[12px] lg:text-[14px] xl:text-[16px] py-2 lg:py-4 xl:py-6 px-3 xl:px-5 border border-[#818181] bg-black/40 hover:bg-black/80 transition">
-                        <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-                            <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        闘牛タオル 2019年
-                    </button>
-                    <button
-                        class="flex items-center gap-2 xl:gap-3 text-white text-[12px] lg:text-[14px] xl:text-[16px] py-2 lg:py-4 xl:py-6 px-3 xl:px-5 border border-[#818181] bg-black/40 hover:bg-black/80 transition">
-                        <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-                            <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        闘牛タオル 2018年
-                    </button>
-                    <button
-                        class="flex items-center gap-2 xl:gap-3 text-white text-[12px] lg:text-[14px] xl:text-[16px] py-2 lg:py-4 xl:py-6 px-3 xl:px-5 border border-[#818181] bg-black/40 hover:bg-black/80 transition">
-                        <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-                            <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        闘牛タオル 2017年
-                    </button>
-                    <button
-                        class="flex items-center gap-2 xl:gap-3 text-white text-[12px] lg:text-[14px] xl:text-[16px] py-2 lg:py-4 xl:py-6 px-3 xl:px-5 border border-[#818181] bg-black/40 hover:bg-black/80 transition">
-                        <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-                            <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        闘牛タオル 2016年
-                    </button>
-                    <button
-                        class="flex items-center gap-2 xl:gap-3 text-white text-[12px] lg:text-[14px] xl:text-[16px] py-2 lg:py-4 xl:py-6 px-3 xl:px-5 border border-[#818181] bg-black/40 hover:bg-black/80 transition">
-                        <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-                            <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        勝鬨ガウン
-                    </button>
+                    <?php if ($history_query->have_posts()) : ?>
+                        <?php while ($history_query->have_posts()) : $history_query->the_post(); ?>
+                            <?php
+                            $post_id = get_the_ID();
+                            $post_title = get_the_title($post_id);
+                            ?>
+                            <a href="<?php echo esc_url(get_permalink($post_id)); ?>">
+                                <button
+                                    class="flex items-center gap-2 xl:gap-3 text-white text-[12px] lg:text-[14px] xl:text-[16px] py-2 lg:py-4 xl:py-6 px-3 xl:px-5 border border-[#818181] bg-black/40 hover:bg-black/80 transition">
+                                    <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
+                                        <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                    <?php echo $post_title ?>
+                                </button>
+                            </a>
+                        <?php endwhile; ?>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

@@ -14,3 +14,9 @@ Text Domain: Usi No Sima
 html {
   margin-top: 0 !important;
 }
+
+
+
+.post-type-history img{
+  width: 100% !important;
+}
