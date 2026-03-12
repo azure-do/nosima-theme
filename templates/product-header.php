@@ -45,8 +45,8 @@ if ($current_find !== '') {
           <?php endif; ?>
           <input type="text" name="find" value="<?php echo esc_attr($current_find); ?>"
             placeholder="商品検索"
-            class="w-[180px] lg:w-[320px] py-[2px] xl:py-[3px] px-3 lg:pr-4 xl:pr-5 text-[13px] lg:text-[14px] xl:text-[16px] 2xl:text-[17px] placeholder:text-[#ccc] outline-none bg-[#5353534d] border border-[#555555] text-white focus:outline-none focus:border-[#dbdbdb]" />
-          <button type="submit" class="absolute right-0 top-0 bottom-0 flex items-center justify-center p-2 pointer-events-none" aria-label="検索">
+            class="w-[180px] lg:w-[320px] py-[2px] xl:py-[3px] px-3 lg:pr-4 xl:pr-7 text-[13px] lg:text-[14px] xl:text-[16px] 2xl:text-[17px] placeholder:text-[#ccc] outline-none bg-[#5353534d] border border-[#555555] text-white focus:outline-none focus:border-[#dbdbdb]" />
+          <button type="submit" class="absolute right-0 top-0 bottom-0 flex items-center justify-center p-2 z-10" aria-label="検索">
             <i class="fa-solid fa-magnifying-glass text-white"></i>
           </button>
         </form>

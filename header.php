@@ -47,12 +47,14 @@
       <div class="relative">
         <div id="searchForm"
           class="absolute md:static top-[43px] right-0 flex items-center flex-shrink items-stretch opacity-0 invisible pointer-events-none md:opacity-100 md:visible md:pointer-events-auto transition-opacity duration-300 ease-out">
-          <input type="text" name="search" placeholder="商品検索"
-            class="w-[180px] lg:w-[320px] px-3 lg:px-4 xl:px-5 text-[13px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] placeholder:text-[#ccc] border-none outline-none bg-white text-black" />
-          <button
-            class="bg-gradient-to-b from-[#303030] to-[#161616] border border-[#555555] text-white text-nowrap text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] px-2 lg:px-4 xl:px-6 py-1 xl:py-2 ml-1 xl:ml-2 transition hover:from-[#161616] hover:to-[#303030] outline-none">
-            検索
-          </button>
+          <form method="get" action="<?php echo esc_url(get_post_type_archive_link('products')); ?>" class="flex items-stretch">
+            <input type="text" name="find" placeholder="商品検索"
+              class="w-[180px] lg:w-[320px] px-3 lg:px-4 xl:px-5 text-[13px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] placeholder:text-[#ccc] border-none outline-none bg-white text-black" />
+            <button type="submit"
+              class="bg-gradient-to-b from-[#303030] to-[#161616] border border-[#555555] text-white text-nowrap text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] px-2 lg:px-4 xl:px-6 py-1 xl:py-2 ml-1 xl:ml-2 transition hover:from-[#161616] hover:to-[#303030] outline-none">
+              検索
+            </button>
+          </form>
         </div>
         <button id="searchBtn" class="block md:hidden p-2 bg-white rounded-full flex items-center justify-center">
           <i class="fa-solid fa-search text-black text-[15px]" aria-hidden="true"></i>

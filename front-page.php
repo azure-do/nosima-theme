@@ -22,15 +22,19 @@ $recommended_products_args = array(
     'post_type'      => 'products',
     'posts_per_page' => -1,
     'post_status'    => 'publish',
+    'meta_query'     => array(
+        array(
+            'key'     => 'recommended_product',
+            'value'   => '1',
+            'compare' => '='
+        ),
+    ),
 );
 
 $news_query = new WP_Query($news_args);
 $recommended_products_query = new WP_Query($recommended_products_args);
 
 ?>
-
-<?php print_r($news_query) ?>
-<?php print_r($recommended_products_query) ?>
 
 <?php get_template_part('templates/fv-top'); ?>
 <main id="main" class="pt-10 lg:pt-12 xl:pt-18 2xl:pt-20 xl:pb-9">
@@ -72,6 +76,7 @@ $recommended_products_query = new WP_Query($recommended_products_args);
                                 </div>
                             </a>
                         <?php endwhile; ?>
+                        <?php wp_reset_postdata(); ?>
                     <?php endif; ?>
                 </div>
                 <div class="w-full flex justify-center items-center mt-6 lg:mt-8 xl:mt-10">
@@ -92,24 +97,13 @@ $recommended_products_query = new WP_Query($recommended_products_args);
                     <h3 class="text-[24px] lg:text-[28px] xl:text-[32px] 2xl:text-[36px] text-white font-medium tracking-wide">
                         おすすめ商品</h3>
                 </div>
-                <!-- <div class="flex flex-col gap-4 group cursor-pointer">
-                    <div class="w-fit overflow-hidden">
-                        <img src="<?php echo T_DIRE_URI; ?>/assets/images/recommended01.webp" alt="商品画像"
-                            class="w-full h-auto group-hover:scale-105 transition">
-                    </div>
-                    <div class="flex flex-col gap-2 text-white text-[12px] lg:text-[14px]">
-                        <span class="group-hover:underline underline-offset-4 group-hover:font-semibold transition">定番 白タオル
-                            顔料プリント 10枚</span>
-                        <span>17,500円～(税込)</span>
-                    </div>
-                </div> -->
                 <div
                     class="w-full grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 md:gap-x-6 lg:gap-x-8 gap-y-8 lg:gap-y-10 xl:gap-y-12 mt-6 lg:mt-8 xl:mt-10">
                     <?php if ($recommended_products_query->have_posts()) : ?>
                         <?php while ($recommended_products_query->have_posts()) : $recommended_products_query->the_post(); ?>
-                            <!-- <?php get_template_part('templates/product-grid-card', null, array('product' => $recommended_products_query->the_post())); ?> -->
-                             <h1>test</h1>
+                            <?php get_template_part('templates/product-grid-card', null, array('product' => get_post())); ?>
                         <?php endwhile; ?>
+                        <?php wp_reset_postdata(); ?>
                     <?php endif; ?>
                 </div>
             </div>
