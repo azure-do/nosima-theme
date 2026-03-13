@@ -123,12 +123,13 @@ add_filter('manage_product_category_custom_column', 'nosima_product_category_cus
  * @param string $html HTML string (e.g. from ACF WYSIWYG field).
  * @return string[] Array of image URL strings.
  */
-function nosima_get_image_urls_from_html( $html ) {
-  if ( empty( $html ) || ! is_string( $html ) ) {
+function nosima_get_image_urls_from_html($html)
+{
+  if (empty($html) || ! is_string($html)) {
     return array();
   }
   $urls = array();
-  if ( preg_match_all( '/<img[^>]+src=(["\'])([^"\']+)\1/', $html, $matches ) ) {
+  if (preg_match_all('/<img[^>]+src=(["\'])([^"\']+)\1/', $html, $matches)) {
     $urls = $matches[2];
   }
   return $urls;

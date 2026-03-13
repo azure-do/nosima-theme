@@ -23,6 +23,23 @@ $product_price = get_field('product_price_label', $product_id);
 $prev_product = get_previous_post();
 $next_product = get_next_post();
 
+$related_products = array();
+$related_term_ids = wp_get_post_terms($product_id, 'product_category', array('fields' => 'ids'));
+if (!is_wp_error($related_term_ids) && !empty($related_term_ids)) {
+  $related_products = get_posts(array(
+    'post_type'      => 'products',
+    'posts_per_page' => 20,
+    'post__not_in'   => array($product_id),
+    'tax_query'      => array(
+      array(
+        'taxonomy' => 'product_category',
+        'field'    => 'term_id',
+        'terms'    => $related_term_ids,
+      ),
+    ),
+  ));
+}
+
 ?>
 
 <main id="main" class="pt-10 lg:pt-12 xl:pt-18 2xl:pt-20 xl:pb-9">
@@ -120,10 +137,32 @@ $next_product = get_next_post();
             <div class="w-full overflow-hidden">
               <div id="productImageSlider" class="swiper-container">
                 <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-                    <img src="<?php echo T_DIRE_URI; ?>/assets/images/recommended01.webp" alt="商品画像1"
-                      class="w-full object-cover rounded-md transition-transform duration-300" />
-                  </div>
+                  <?php if (!empty($related_products)) : ?>
+                    <?php foreach ($related_products as $related) : ?>
+                      <?php
+                      $related_img = get_field('product_img', $related->ID);
+                      $related_img_url = '';
+                      if (is_array($related_img) && !empty($related_img['url'])) {
+                        $related_img_url = $related_img['url'];
+                      } elseif (is_string($related_img)) {
+                        $related_img_url = $related_img;
+                      }
+                      if (!$related_img_url) {
+                        $related_img_url = get_the_post_thumbnail_url($related->ID, 'medium');
+                      }
+                      if (!$related_img_url) {
+                        $related_img_url = T_DIRE_URI . '/assets/images/recommended01.webp';
+                      }
+                      ?>
+                      <div class="swiper-slide">
+                        <a href="<?php echo esc_url(get_permalink($related->ID)); ?>">
+                          <img src="<?php echo esc_url($related_img_url); ?>"
+                            alt="<?php echo esc_attr(get_the_title($related->ID)); ?>"
+                            class="w-full object-cover rounded-md transition-transform duration-300" />
+                        </a>
+                      </div>
+                    <?php endforeach; ?>
+                  <?php endif; ?>
                 </div>
               </div>
             </div>
