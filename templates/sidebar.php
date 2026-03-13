@@ -38,12 +38,12 @@ $product_query_preserve = array_filter(array(
         <?php foreach ($terms as $term): ?>
           <?php if ($term->custom_towel_type == 'standard_towel'): ?>
             <?php
-              $term_url = get_term_link($term);
-              if (!is_wp_error($term_url) && !empty($product_query_preserve)) {
-                $term_url = add_query_arg($product_query_preserve, $term_url);
-              }
-              $term_url = is_wp_error($term_url) ? '#' : $term_url;
-              ?>
+            $term_url = get_term_link($term);
+            if (!is_wp_error($term_url) && !empty($product_query_preserve)) {
+              $term_url = add_query_arg($product_query_preserve, $term_url);
+            }
+            $term_url = is_wp_error($term_url) ? '#' : $term_url;
+            ?>
             <a href="<?php echo esc_url($term_url); ?>">
               <li
                 class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer group hover:underline underline-offset-4 transition">
@@ -71,12 +71,12 @@ $product_query_preserve = array_filter(array(
         <?php foreach ($terms as $term): ?>
           <?php if ($term->custom_towel_type == 'sp_color_towel'): ?>
             <?php
-              $term_url = get_term_link($term);
-              if (!is_wp_error($term_url) && !empty($product_query_preserve)) {
-                $term_url = add_query_arg($product_query_preserve, $term_url);
-              }
-              $term_url = is_wp_error($term_url) ? '#' : $term_url;
-              ?>
+            $term_url = get_term_link($term);
+            if (!is_wp_error($term_url) && !empty($product_query_preserve)) {
+              $term_url = add_query_arg($product_query_preserve, $term_url);
+            }
+            $term_url = is_wp_error($term_url) ? '#' : $term_url;
+            ?>
             <a href="<?php echo esc_url($term_url); ?>">
               <li
                 class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer group hover:underline underline-offset-4 transition">
@@ -104,12 +104,12 @@ $product_query_preserve = array_filter(array(
         <?php foreach ($terms as $term): ?>
           <?php if ($term->custom_towel_type == 'flat_weave_towel'): ?>
             <?php
-              $term_url = get_term_link($term);
-              if (!is_wp_error($term_url) && !empty($product_query_preserve)) {
-                $term_url = add_query_arg($product_query_preserve, $term_url);
-              }
-              $term_url = is_wp_error($term_url) ? '#' : $term_url;
-              ?>
+            $term_url = get_term_link($term);
+            if (!is_wp_error($term_url) && !empty($product_query_preserve)) {
+              $term_url = add_query_arg($product_query_preserve, $term_url);
+            }
+            $term_url = is_wp_error($term_url) ? '#' : $term_url;
+            ?>
             <a href="<?php echo esc_url($term_url); ?>">
               <li
                 class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer group hover:underline underline-offset-4 transition">
@@ -128,7 +128,7 @@ $product_query_preserve = array_filter(array(
         <?php endforeach; ?>
       </ul>
     </div>
-    <div class="flex flex-col pt-4">
+    <div class="flex flex-col pt-4 lg:pt-8">
       <div
         class="flex items-center justify-between bg-gradient-to-r from-[#a50000] to-[#5f0000] py-1 px-6 relative">
         <span
@@ -147,7 +147,7 @@ $product_query_preserve = array_filter(array(
               }
               $term_url = is_wp_error($term_url) ? '#' : $term_url;
               ?>
-            <a href="<?php echo esc_url($term_url); ?>">
+              <a href="<?php echo esc_url($term_url); ?>">
                 <li
                   class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer group hover:underline underline-offset-4 transition">
                   <svg class="w-[9px] text-[#b40000] group-hover:hidden" viewBox="0 0 10 16"
@@ -166,7 +166,7 @@ $product_query_preserve = array_filter(array(
         </ul>
       </div>
     </div>
-    <div class="flex flex-col pt-4">
+    <div class="flex flex-col pt-4 lg:pt-8">
       <div
         class="flex items-center justify-between bg-gradient-to-r from-[#a50000] to-[#5f0000] py-1 px-6 relative">
         <span
@@ -185,7 +185,7 @@ $product_query_preserve = array_filter(array(
               }
               $term_url = is_wp_error($term_url) ? '#' : $term_url;
               ?>
-            <a href="<?php echo esc_url($term_url); ?>">
+              <a href="<?php echo esc_url($term_url); ?>">
                 <li
                   class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer group hover:underline underline-offset-4 transition">
                   <svg class="w-[9px] text-[#b40000] group-hover:hidden" viewBox="0 0 10 16"
@@ -204,7 +204,7 @@ $product_query_preserve = array_filter(array(
         </ul>
       </div>
     </div>
-    <div class="flex flex-col pt-4">
+    <div class="flex flex-col pt-4 lg:pt-8">
       <button
         class="btn-line flex items-center justify-center gap-3 bg-[#06C755] text-white text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[20px] pr-2 py-[6px] md:py-2 lg:py-2 xl:py-[10px] hover:bg-white hover:text-[#06C755] duration-200 group relative overflow-hidden">
         <span class="relative w-[30px] lg:w-[35px] xl:w-[40px] 2xl:w-[45px] aspect-[10/9] flex items-center">
@@ -217,6 +217,18 @@ $product_query_preserve = array_filter(array(
         </span>
         友達追加
       </button>
+    </div>
+    <div id="intro-video" class="flex flex-col pt-4 lg:pt-8 gap-4 lg:gap-6">
+      <iframe width="100%" height="auto" src="https://www.youtube.com/embed/oItEUbAXao8?si=deMS9729x01SuVGm"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen="">
+      </iframe>
+      <iframe width="100%" height="auto" src="https://www.youtube.com/embed/PRqFMf84vpQ?si=SqyOTsipBIJQfuiD"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen="">
+      </iframe>
     </div>
   </div>
 </div>

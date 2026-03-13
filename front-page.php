@@ -33,12 +33,12 @@ $recommended_products_args = array(
 $history_args = array(
     'post_type'      => 'history',
     'post_status'    => 'publish',
+    'posts_per_page' => -1,
 );
 
 $news_query = new WP_Query($news_args);
 $recommended_products_query = new WP_Query($recommended_products_args);
 $history_query = new WP_Query($history_args);
-
 ?>
 
 <?php get_template_part('templates/fv-top'); ?>
@@ -129,7 +129,7 @@ $history_query = new WP_Query($history_args);
                             ?>
                             <a href="<?php echo esc_url(get_permalink($post_id)); ?>">
                                 <button
-                                    class="flex items-center gap-2 xl:gap-3 text-white text-[12px] lg:text-[14px] xl:text-[16px] py-2 lg:py-4 xl:py-6 px-3 xl:px-5 border border-[#818181] bg-black/40 hover:bg-black/80 transition">
+                                    class="w-full flex items-center gap-2 xl:gap-3 text-white text-[12px] lg:text-[14px] xl:text-[16px] py-2 lg:py-4 xl:py-6 px-3 xl:px-5 border border-[#818181] bg-black/40 hover:bg-black/80 transition">
                                     <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
                                         <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
                                             stroke-linecap="round" stroke-linejoin="round" />

@@ -211,4 +211,65 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+
+  // -------------------------  History image modal  -----------------------------------
+  const historyGrid = document.getElementById("history-image-grid");
+  const historyModal = document.getElementById("history-image-modal");
+  const historyModalImg = document.getElementById("history-modal-image");
+  const historyModalClose = document.getElementById("history-modal-close");
+  const historyModalPrev = document.getElementById("history-modal-prev");
+  const historyModalNext = document.getElementById("history-modal-next");
+  if (historyGrid && historyModal && historyModalImg) {
+    let historyUrls = [];
+    try {
+      const raw = historyGrid.getAttribute("data-image-urls");
+      if (raw) historyUrls = JSON.parse(raw);
+    } catch (e) {}
+    if (historyUrls.length) {
+      let historyCurrentIndex = 0;
+      function showHistoryModal(index) {
+        historyCurrentIndex = (index + historyUrls.length) % historyUrls.length;
+        historyModalImg.src = historyUrls[historyCurrentIndex];
+        historyModal.classList.remove("hidden");
+        historyModal.classList.add("flex");
+        document.body.style.overflow = "hidden";
+        if (historyModalPrev) historyModalPrev.disabled = historyUrls.length <= 1;
+        if (historyModalNext) historyModalNext.disabled = historyUrls.length <= 1;
+      }
+      function hideHistoryModal() {
+        historyModal.classList.add("hidden");
+        historyModal.classList.remove("flex");
+        document.body.style.overflow = "";
+      }
+      function goHistoryPrev() {
+        if (historyUrls.length <= 1) return;
+        historyCurrentIndex = (historyCurrentIndex - 1 + historyUrls.length) % historyUrls.length;
+        historyModalImg.src = historyUrls[historyCurrentIndex];
+      }
+      function goHistoryNext() {
+        if (historyUrls.length <= 1) return;
+        historyCurrentIndex = (historyCurrentIndex + 1) % historyUrls.length;
+        historyModalImg.src = historyUrls[historyCurrentIndex];
+      }
+      historyGrid.querySelectorAll(".history-image-trigger").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          const i = parseInt(this.getAttribute("data-index"), 10);
+          if (!isNaN(i)) showHistoryModal(i);
+        });
+      });
+      if (historyModalClose) historyModalClose.addEventListener("click", hideHistoryModal);
+      if (historyModalPrev) historyModalPrev.addEventListener("click", goHistoryPrev);
+      if (historyModalNext) historyModalNext.addEventListener("click", goHistoryNext);
+      historyModal.addEventListener("click", function (e) {
+        if (e.target === historyModal) hideHistoryModal();
+      });
+      document.addEventListener("keydown", function (e) {
+        if (!historyModal.classList.contains("hidden")) {
+          if (e.key === "Escape") hideHistoryModal();
+          if (e.key === "ArrowLeft") goHistoryPrev();
+          if (e.key === "ArrowRight") goHistoryNext();
+        }
+      });
+    }
+  }
 });
