@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="w-full lg:w-1/2 flex justify-center md:justify- end items-center">
-            <a href="privacy-policy.html" class="text-white text-[16px] xl:text-[16px]">プライバシーポリシー</a>
+            <a href="#" class="text-white text-[16px] xl:text-[16px]">プライバシーポリシー</a>
         </div>
     </div>
     <div class="w-full max-w-[680px] lg:max-w-[920px] xl:max-w-[1200px] 2xl:max-w-[1400px] mx-auto mt-8">

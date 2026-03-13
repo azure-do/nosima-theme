@@ -9,7 +9,8 @@
 get_header();
 ?>
 
-<main id="main" class="w-full flex justify-center">
+<main
+    id="main" class="w-full flex justify-center">
     <?php
     if (have_posts()) :
         while (have_posts()) :

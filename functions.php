@@ -205,3 +205,71 @@ add_filter('get_term', function ($term, $taxonomy) {
   }
   return $term;
 }, 10, 2);
+
+function nosima_get_breadcrumb() {
+  $items = array();
+  $items[] = array('label' => 'ホーム', 'url' => home_url('/'));
+
+  if (is_front_page()) {
+    return $items;
+  }
+
+  if (is_post_type_archive('products')) {
+    $items[] = array('label' => '商品一覧', 'url' => '');
+    return $items;
+  }
+
+  if (is_post_type_archive('news')) {
+    $items[] = array('label' => 'ニュース', 'url' => '');
+    return $items;
+  }
+
+  if (is_post_type_archive('history')) {
+    $items[] = array('label' => 'ヒストリー', 'url' => '');
+    return $items;
+  }
+
+  if (is_tax('product_category')) {
+    $term = get_queried_object();
+    $items[] = array('label' => '商品一覧', 'url' => get_post_type_archive_link('products'));
+    $title = get_term_meta($term->term_id, 'category_title', true);
+    $items[] = array('label' => $title ? $title : $term->name, 'url' => '');
+    return $items;
+  }
+
+  if (is_singular('products')) {
+    $items[] = array('label' => '商品一覧', 'url' => get_post_type_archive_link('products'));
+    $terms = get_the_terms(get_the_ID(), 'product_category');
+    if ($terms && !is_wp_error($terms)) {
+      $term = reset($terms);
+      $title = get_term_meta($term->term_id, 'category_title', true);
+      $items[] = array('label' => $title ? $title : $term->name, 'url' => get_term_link($term));
+    }
+    $items[] = array('label' => get_the_title(), 'url' => '');
+    return $items;
+  }
+
+  if (is_singular('news')) {
+    $items[] = array('label' => 'ニュース', 'url' => get_post_type_archive_link('news'));
+    $items[] = array('label' => get_the_title(), 'url' => '');
+    return $items;
+  }
+
+  if (is_singular('history')) {
+    $items[] = array('label' => 'ヒストリー', 'url' => get_post_type_archive_link('history'));
+    $items[] = array('label' => get_the_title(), 'url' => '');
+    return $items;
+  }
+
+  if (is_page()) {
+    $items[] = array('label' => get_the_title(), 'url' => '');
+    return $items;
+  }
+
+  if (is_single()) {
+    $items[] = array('label' => get_the_title(), 'url' => '');
+    return $items;
+  }
+
+  return $items;
+}

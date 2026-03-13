@@ -47,14 +47,14 @@ $product_query_preserve = array_filter(array(
             <a href="<?php echo esc_url($term_url); ?>">
               <li
                 class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer group hover:underline underline-offset-4 transition">
-                <svg class="w-[9px] text-[#b40000] group-hover:hidden" viewBox="0 0 10 16"
+                <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16"
                   xmlns="http://www.w3.org/2000/svg">
                   <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
                     stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
-                <img src="<?php echo T_DIRE_URI; ?>/assets/images/mark01.webp" alt="マーク"
+                <!-- <img src="<?php echo T_DIRE_URI; ?>/assets/images/mark01.webp" alt="マーク"
                   class="w-[16px] lg:w-[18px] xl:w-[22px] 2xl:w-[24px] hidden pointer-events-none select-none group-hover:opacity-100 opacity-0 group-hover:block transition-opacity duration-300"
-                  style="transform: rotateY(180deg);">
+                  style="transform: rotateY(180deg);"> -->
                 <?php echo $term->name; ?>
               </li>
             </a>
@@ -80,14 +80,14 @@ $product_query_preserve = array_filter(array(
             <a href="<?php echo esc_url($term_url); ?>">
               <li
                 class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer group hover:underline underline-offset-4 transition">
-                <svg class="w-[9px] text-[#b40000] group-hover:hidden" viewBox="0 0 10 16"
+                <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16"
                   xmlns="http://www.w3.org/2000/svg">
                   <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
                     stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
-                <img src="<?php echo T_DIRE_URI; ?>/assets/images/mark01.webp" alt="マーク"
+                <!-- <img src="<?php echo T_DIRE_URI; ?>/assets/images/mark01.webp" alt="マーク"
                   class="w-[16px] lg:w-[18px] xl:w-[22px] 2xl:w-[24px] hidden pointer-events-none select-none group-hover:opacity-100 opacity-0 group-hover:block transition-opacity duration-300"
-                  style="transform: rotateY(180deg);">
+                  style="transform: rotateY(180deg);"> -->
                 <?php echo $term->name; ?>
               </li>
             </a>
@@ -113,14 +113,14 @@ $product_query_preserve = array_filter(array(
             <a href="<?php echo esc_url($term_url); ?>">
               <li
                 class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer group hover:underline underline-offset-4 transition">
-                <svg class="w-[9px] text-[#b40000] group-hover:hidden" viewBox="0 0 10 16"
+                <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16"
                   xmlns="http://www.w3.org/2000/svg">
                   <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
                     stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
-                <img src="<?php echo T_DIRE_URI; ?>/assets/images/mark01.webp" alt="マーク"
+                <!-- <img src="<?php echo T_DIRE_URI; ?>/assets/images/mark01.webp" alt="マーク"
                   class="w-[16px] lg:w-[18px] xl:w-[22px] 2xl:w-[24px] hidden pointer-events-none select-none group-hover:opacity-100 opacity-0 group-hover:block transition-opacity duration-300"
-                  style="transform: rotateY(180deg);">
+                  style="transform: rotateY(180deg);"> -->
                 <?php echo $term->name; ?>
               </li>
             </a>
@@ -150,14 +150,14 @@ $product_query_preserve = array_filter(array(
               <a href="<?php echo esc_url($term_url); ?>">
                 <li
                   class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer group hover:underline underline-offset-4 transition">
-                  <svg class="w-[9px] text-[#b40000] group-hover:hidden" viewBox="0 0 10 16"
+                  <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16"
                     xmlns="http://www.w3.org/2000/svg">
                     <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
                       stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
-                  <img src="<?php echo T_DIRE_URI; ?>/assets/images/mark01.webp" alt="マーク"
+                  <!-- <img src="<?php echo T_DIRE_URI; ?>/assets/images/mark01.webp" alt="マーク"
                     class="w-[16px] lg:w-[18px] xl:w-[22px] 2xl:w-[24px] hidden pointer-events-none select-none group-hover:opacity-100 opacity-0 group-hover:block transition-opacity duration-300"
-                    style="transform: rotateY(180deg);">
+                    style="transform: rotateY(180deg);"> -->
                   <?php echo $term->name; ?>
                 </li>
               </a>
@@ -188,7 +188,7 @@ $product_query_preserve = array_filter(array(
               <a href="<?php echo esc_url($term_url); ?>">
                 <li
                   class="flex items-center gap-2 xl:gap-3 text-white text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-2 xl:pl-4 cursor-pointer group hover:underline underline-offset-4 transition">
-                  <svg class="w-[9px] text-[#b40000] group-hover:hidden" viewBox="0 0 10 16"
+                  <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16"
                     xmlns="http://www.w3.org/2000/svg">
                     <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
                       stroke-linecap="round" stroke-linejoin="round" />

@@ -53,9 +53,11 @@ $products = get_posts($products_args);
 ?>
 
 <?php get_template_part('templates/fv-all'); ?>
+<?php get_template_part('templates/breadcrumb'); ?>
 <?php get_template_part('templates/page-info', null, array('title' => esc_html(get_term_meta($term->term_id, 'category_title', true) ?: $term->name), 'description' => $term->description)); ?>
 
-<main id="main" class="pt-6 lg:pt-8 xl:pt-10 2xl:pt-12 xl:pb-9">
+<main
+  id="main" class="pt-6 lg:pt-8 xl:pt-10 2xl:pt-12 xl:pb-9">
   <div
     class="lg:max-w-[920px] xl:max-w-[1200px] 2xl:max-w-[1400px] mx-auto flex gap-6 lg:gap-8 xl:gap-10 2xl:gap-[52px]">
     <div id="overlay"

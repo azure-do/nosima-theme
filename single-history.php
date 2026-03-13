@@ -24,8 +24,10 @@ $next_post = get_next_post();
 
 <?php get_template_part('templates/fv-all'); ?>
 <?php get_template_part('templates/page-info', null, array('title' => $history_title, 'description' => $history_description)); ?>
+<?php get_template_part('templates/breadcrumb'); ?>
 
-<main id="main" class="pt-10 lg:pt-12 xl:pt-18 2xl:pt-20 xl:pb-9">
+<main
+  id="main" class="pt-0 xl:pb-9">
   <div
     class="lg:max-w-[920px] xl:max-w-[1200px] 2xl:max-w-[1400px] mx-auto flex gap-6 lg:gap-8 xl:gap-10 2xl:gap-[52px]">
     <div id="overlay"
@@ -77,22 +79,22 @@ $next_post = get_next_post();
           class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/90 transition-opacity duration-300"
           role="dialog" aria-modal="true" aria-label="画像ビューア">
           <button type="button" id="history-modal-close"
-            class="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition"
+            class="absolute top-24 right-4 z-10 w-8 md:w-10 aspect-[1] flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition"
             aria-label="閉じる">
-            <i class="fa-solid fa-xmark text-xl"></i>
+            <i class="fa-solid fa-xmark text-md md:text-xl"></i>
           </button>
           <button type="button" id="history-modal-prev"
-            class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition disabled:opacity-40 disabled:pointer-events-none"
+            class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 w-8 md:w-14 aspect-[1] flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition disabled:opacity-40 disabled:pointer-events-none"
             aria-label="前の画像">
-            <i class="fa-solid fa-chevron-left text-xl md:text-2xl"></i>
+            <i class="fa-solid fa-chevron-left text-md md:text-2xl"></i>
           </button>
           <div class="flex-1 flex items-center justify-center max-w-[90vw] max-h-[90vh] p-8 xl:p-12 md:p-16">
             <img id="history-modal-image" src="" alt="ブランド画像（拡大）" class="max-w-full max-h-[85vh] w-[80vw] h-auto object-contain">
           </div>
           <button type="button" id="history-modal-next"
-            class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition disabled:opacity-40 disabled:pointer-events-none"
+            class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 w-8 md:w-14 aspect-[1] flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition disabled:opacity-40 disabled:pointer-events-none"
             aria-label="次の画像">
-            <i class="fa-solid fa-chevron-right text-xl md:text-2xl"></i>
+            <i class="fa-solid fa-chevron-right text-md md:text-2xl"></i>
           </button>
         </div>
       </div>
