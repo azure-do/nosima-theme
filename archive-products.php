@@ -14,8 +14,9 @@ $products_find = isset($_GET['find']) ? sanitize_text_field(wp_unslash($_GET['fi
 
 $products_args = array(
     'post_type'      => 'products',
-    'posts_per_page' => -1,
+    'posts_per_page' => 20,
     'post_status'    => 'publish',
+    'paged'          => get_query_var('paged') ? get_query_var('paged') : 1,
 );
 if ($products_find !== '') {
     $products_args['s'] = $products_find;
@@ -72,6 +73,9 @@ $products = get_posts($products_args);
                         <?php get_template_part('templates/product-grid-card', null, array('product' => $product)); ?>
                     <?php endforeach; ?>
                 </div>
+            </div>
+            <div class="w-full">
+                <?php get_template_part('templates/pagination'); ?>
             </div>
         </div>
     </div>

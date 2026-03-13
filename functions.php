@@ -15,6 +15,18 @@ function nosima_adjust_news_archive_query($query)
 }
 add_action('pre_get_posts', 'nosima_adjust_news_archive_query');
 
+function nosima_adjust_products_archive_query($query)
+{
+  if (is_admin() || ! $query->is_main_query()) {
+    return;
+  }
+
+  if ($query->is_post_type_archive('products')) {
+    $query->set('posts_per_page', 20);
+  }
+}
+add_action('pre_get_posts', 'nosima_adjust_products_archive_query');
+
 // Add a custom field (select) for "product_category" taxonomy term (Edit form)
 function nosima_add_product_category_custom_field($term)
 {
@@ -139,16 +151,16 @@ add_action('admin_print_footer_scripts-edit-tags.php', function () {
   if (empty($_GET['taxonomy']) || $_GET['taxonomy'] !== 'product_category') {
     return;
   }
-  ?>
+?>
   <script>
-    (function () {
+    (function() {
       var parentRow = document.getElementById('parent');
       var titleRow = document.getElementById('category_title_row');
       if (!parentRow || !titleRow || !parentRow.parentNode) return;
       parentRow.parentNode.insertBefore(titleRow, parentRow.nextSibling);
     })();
   </script>
-  <?php
+<?php
 });
 
 // =========== [ NEW CODE BELOW ] =============
@@ -175,16 +187,21 @@ function nosima_get_image_urls_from_html($html)
 // Make custom towel type available to the frontend (e.g. sidebar.php)
 // Usage: $term->custom_towel_type will be populated
 add_filter('get_terms', function ($terms, $taxonomies, $args, $term_query) {
-  // Only apply for product_category taxonomy
   if (is_array($taxonomies) && in_array('product_category', $taxonomies)) {
     foreach ($terms as $term) {
-      // Skip if $term is not an object (handles array of IDs)
       if (!is_object($term)) {
         continue;
       }
-      $custom_towel_type = get_term_meta($term->term_id, 'custom_towel_type', true);
-      $term->custom_towel_type = $custom_towel_type;
+      $term->custom_towel_type = get_term_meta($term->term_id, 'custom_towel_type', true);
+      $term->category_title   = get_term_meta($term->term_id, 'category_title', true);
     }
   }
   return $terms;
 }, 10, 4);
+
+add_filter('get_term', function ($term, $taxonomy) {
+  if (is_object($term) && $taxonomy === 'product_category') {
+    $term->category_title = get_term_meta($term->term_id, 'category_title', true);
+  }
+  return $term;
+}, 10, 2);

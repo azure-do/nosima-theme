@@ -12,6 +12,10 @@ $post_id = get_the_ID();
 $post_date = get_the_date('Y.m.d', $post_id);
 $post_title = get_the_title($post_id);
 $post_content = get_the_content($post_id);
+
+$history_description = get_field('history_description', $post_id);
+$history_title = get_field('history_title', $post_id);
+
 $all_brand_urls = nosima_get_image_urls_from_html($post_content);
 
 $prev_post = get_previous_post();
@@ -19,6 +23,8 @@ $next_post = get_next_post();
 ?>
 
 <?php get_template_part('templates/fv-all'); ?>
+<?php get_template_part('templates/page-info', null, array('title' => $history_title, 'description' => $history_description)); ?>
+
 <main id="main" class="pt-10 lg:pt-12 xl:pt-18 2xl:pt-20 xl:pb-9">
   <div
     class="lg:max-w-[920px] xl:max-w-[1200px] 2xl:max-w-[1400px] mx-auto flex gap-6 lg:gap-8 xl:gap-10 2xl:gap-[52px]">

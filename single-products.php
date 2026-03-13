@@ -43,14 +43,14 @@ if (!is_wp_error($related_term_ids) && !empty($related_term_ids)) {
 ?>
 
 <?php get_template_part('templates/fv-all'); ?>
-<main id="main" class="pt-10 lg:pt-12 xl:pt-18 2xl:pt-20 xl:pb-9">
+<main id="main" class="w-full pt-10 lg:pt-12 xl:pt-18 2xl:pt-20 xl:pb-9">
   <div
     class="lg:max-w-[920px] xl:max-w-[1200px] 2xl:max-w-[1400px] mx-auto flex gap-6 lg:gap-8 xl:gap-10 2xl:gap-[52px]">
     <div id="overlay"
       class="hidden w-[100vw] h-[100vh] fixed inset-0 z-30 bg-[#00000075] cursor-pointer transition-opacity duration-300 ease-out">
     </div>
     <?php get_template_part('templates/sidebar'); ?>
-    <div id="content" class="flex-1 md:max-w-[680px] lg:max-[545px] xl:max-w-[900px] 2xl:max-w-[1068px] mx-auto">
+    <div id="content" class="w-full flex-1 md:max-w-[680px] lg:max-[545px] xl:max-w-[900px] 2xl:max-w-[1068px] mx-auto">
       <div class="w-full px-7 md:px-0">
         <div id="product-detail-header" class="w-full pb-4 border-b border-[#333]">
           <div class="flex justify-between">
@@ -79,13 +79,13 @@ if (!is_wp_error($related_term_ids) && !empty($related_term_ids)) {
         </div>
         <!-- おすすめ商品 -->
         <section class="w-full mt-6 lg:mt-8 xl:mt-10">
-          <div class="flex flex-col lg:flex-row gap-8">
-            <div class="flex flex-row w-full lg:w-auto gap-6">
-              <div class="flex-shrink-0 w-full max-w-[400px] lg:max-w-[480px] xl:max-w-[540px] 2xl:max-w-[600px]">
+          <div class="flex flex-col flex-col xl:flex-row gap-8">
+            <div class="flex flex-row w-full xl:w-1/2 gap-6">
+              <div class="w-full flex-shrink-0 max-w-full lg:max-w-[900px] xl:max-w-[540px] 2xl:max-w-[600px]">
                 <div class="w-full">
                   <!-- Main Image Swiper -->
                   <div
-                    class="swiper mainImageSwiper aspect-w-1 aspect-h-1 w-full rounded-lg overflow-hidden border border-[#ccc] bg-black shadow mb-4">
+                    class="w-full swiper mainImageSwiper aspect-w-1 aspect-h-1 rounded-lg overflow-hidden border border-[#ccc] bg-black shadow mb-4">
                     <div class="swiper-wrapper">
                       <div class="swiper-slide">
                         <img src="<?php echo $product_img; ?>" alt="商品画像1"
@@ -123,7 +123,7 @@ if (!is_wp_error($related_term_ids) && !empty($related_term_ids)) {
                 </div>
               </div>
             </div>
-            <div class="flex-1 pt-4 lg:pt-0 flex flex-col gap-4">
+            <div class="flex-1 pt-4 lg:pt-0 flex flex-col gap-4 overflow-overflow-y-scroll">
               <h2 class="text-white text-[20px] lg:text-[24px] xl:text-[28px] font-bold mb-1"><?php echo $product_title; ?></h2>
               <span class="text-[#b40000] text-[18px] lg:text-[22px] xl:text-[24px] font-semibold"><?php echo $product_price; ?></span>
               <div class="nosima-wysiwyg text-white text-[14px] lg:text-[16px] xl:text-[18px] leading-relaxed space-y-2">

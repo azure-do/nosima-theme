@@ -1,4 +1,8 @@
-<section id="page-info">
+<?php
+$title = isset($args['title']) ? $args['title'] : '';
+$description = isset($args['description']) ? $args['description'] : '';
+?>
+<section id="page-info" class="px-7">
   <div>
     <div class="lg:max-w-[800px] xl:max-w-[1200px] 2xl:max-w-[1400px] mx-auto pt-10 lg:pt-12 xl:pt-18 2xl:pt-20">
       <div class="flex flex-col items-center gap-1 mb-4">

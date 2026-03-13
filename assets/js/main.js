@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // },
       speed: 1000,
       thumbs: {
-        swiper: thumbSwiper
+        swiper: thumbSwiper,
       }
     });
   }
@@ -224,7 +224,7 @@ document.addEventListener("DOMContentLoaded", function () {
     try {
       const raw = historyGrid.getAttribute("data-image-urls");
       if (raw) historyUrls = JSON.parse(raw);
-    } catch (e) {}
+    } catch (e) { }
     if (historyUrls.length) {
       let historyCurrentIndex = 0;
       function showHistoryModal(index) {
