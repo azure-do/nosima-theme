@@ -42,6 +42,7 @@ if (!is_wp_error($related_term_ids) && !empty($related_term_ids)) {
 
 ?>
 
+<?php get_template_part('templates/fv-all'); ?>
 <main id="main" class="pt-10 lg:pt-12 xl:pt-18 2xl:pt-20 xl:pb-9">
   <div
     class="lg:max-w-[920px] xl:max-w-[1200px] 2xl:max-w-[1400px] mx-auto flex gap-6 lg:gap-8 xl:gap-10 2xl:gap-[52px]">

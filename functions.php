@@ -18,8 +18,8 @@ add_action('pre_get_posts', 'nosima_adjust_news_archive_query');
 // Add a custom field (select) for "product_category" taxonomy term (Edit form)
 function nosima_add_product_category_custom_field($term)
 {
-  // Get saved value (if editing)
   $selected = get_term_meta($term->term_id, 'custom_towel_type', true);
+  $category_title = get_term_meta($term->term_id, 'category_title', true);
   $options = array(
     'standard_towel'   => '定番タオル',
     'sp_color_towel'   => 'SPカラータオル',
@@ -38,6 +38,12 @@ function nosima_add_product_category_custom_field($term)
         <?php endforeach; ?>
       </select>
       <p class="description">このカテゴリーの種類を選択してください。</p>
+    </td>
+  </tr>
+  <tr class="form-field" id="category_title_row">
+    <th scope="row"><label for="category_title">タイトル</label></th>
+    <td>
+      <input name="category_title" id="category_title" type="text" value="<?php echo esc_attr($category_title); ?>" class="regular-text" />
     </td>
   </tr>
 <?php
@@ -64,6 +70,10 @@ add_action('product_category_add_form_fields', function ($taxonomy) {
     </select>
     <p class="description">このカテゴリーの種類を選択してください。</p>
   </div>
+  <div class="form-field">
+    <label for="category_title">タイトル</label>
+    <input name="category_title" id="category_title" type="text" value="" class="regular-text" />
+  </div>
 <?php
 }, 10, 1);
 
@@ -73,6 +83,9 @@ function nosima_save_product_category_custom_field($term_id)
   if (isset($_POST['custom_towel_type'])) {
     update_term_meta($term_id, 'custom_towel_type', sanitize_text_field($_POST['custom_towel_type']));
   }
+  if (isset($_POST['category_title'])) {
+    update_term_meta($term_id, 'category_title', sanitize_text_field($_POST['category_title']));
+  }
 }
 add_action('created_product_category', 'nosima_save_product_category_custom_field', 10, 1);
 add_action('edited_product_category', 'nosima_save_product_category_custom_field', 10, 1);
@@ -80,12 +93,12 @@ add_action('edited_product_category', 'nosima_save_product_category_custom_field
 // Show custom field value in the terms list table column
 function nosima_product_category_custom_column_add($columns)
 {
-  // Insert 'custom_towel_type' after the name column
   $new_columns = array();
   foreach ($columns as $key => $val) {
     $new_columns[$key] = $val;
     if ($key === 'name') {
       $new_columns['custom_towel_type'] = '商品の種類 ';
+      $new_columns['category_title'] = 'タイトル';
     }
   }
   return $new_columns;
@@ -110,9 +123,33 @@ function nosima_product_category_custom_column_show($out, $column_name, $term_id
       return '<span style="color:#aaa;">-</span>';
     }
   }
+  if ($column_name === 'category_title') {
+    $value = get_term_meta($term_id, 'category_title', true);
+    if (!empty($value)) {
+      return esc_html($value);
+    } else {
+      return '<span style="color:#aaa;">-</span>';
+    }
+  }
   return $out;
 }
 add_filter('manage_product_category_custom_column', 'nosima_product_category_custom_column_show', 10, 3);
+
+add_action('admin_print_footer_scripts-edit-tags.php', function () {
+  if (empty($_GET['taxonomy']) || $_GET['taxonomy'] !== 'product_category') {
+    return;
+  }
+  ?>
+  <script>
+    (function () {
+      var parentRow = document.getElementById('parent');
+      var titleRow = document.getElementById('category_title_row');
+      if (!parentRow || !titleRow || !parentRow.parentNode) return;
+      parentRow.parentNode.insertBefore(titleRow, parentRow.nextSibling);
+    })();
+  </script>
+  <?php
+});
 
 // =========== [ NEW CODE BELOW ] =============
 
