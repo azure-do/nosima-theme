@@ -7,7 +7,7 @@ if (empty($items)) {
   return;
 }
 ?>
-<nav class="breadcrumb w-full lg:max-w-[920px] xl:max-w-[1200px] 2xl:max-w-[1400px] mx-auto py-2 lg:py-3 my-8" aria-label="パンくずリスト">
+<nav class="breadcrumb w-full lg:max-w-[920px] xl:max-w-[1200px] 2xl:max-w-[1400px] mx-auto py-2 lg:py-3 my-4 lg:my-6 xl:my-8 px-7 md:px-0" aria-label="パンくずリスト">
   <ol class="flex flex-wrap items-center gap-1 text-[12px] lg:text-[13px] xl:text-[14px] text-white/80">
     <?php foreach ($items as $i => $item) : ?>
       <li class="flex items-center gap-1">

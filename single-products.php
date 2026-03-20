@@ -91,14 +91,14 @@ if (!is_wp_error($related_term_ids) && !empty($related_term_ids)) {
                     <div class="swiper-wrapper">
                       <div class="swiper-slide">
                         <img src="<?php echo $product_img; ?>" alt="商品画像1"
-                          class="zoomable object-contain w-full h-full transition-all duration-300" />
+                          class="zoomable aspect-square object-contain w-full h-full transition-all duration-300" />
                       </div>
                       <?php
                       if (!empty($product_sub_img_urls)) {
                         foreach ($product_sub_img_urls as $sub_img_url) : ?>
                           <div class="swiper-slide">
                             <img src="<?php echo $sub_img_url; ?>" alt="商品画像"
-                              class="zoomable object-contain w-full h-full transition-all duration-300" />
+                              class="zoomable aspect-square object-contain w-full h-full transition-all duration-300" />
                           </div>
                         <?php endforeach; ?>
                       <?php } ?>
@@ -109,14 +109,14 @@ if (!is_wp_error($related_term_ids) && !empty($related_term_ids)) {
                     <div class="swiper-wrapper">
                       <div class="swiper-slide cursor-pointer border border-[#eee] rounded overflow-hidden">
                         <img src="<?php echo $product_img; ?>" alt="商品画像1サムネイル"
-                          class="object-contain w-full h-auto transition-all duration-300 filter-[black]" />
+                          class="aspect-square object-contain w-full h-auto transition-all duration-300 filter-[black]" />
                       </div>
                       <?php
                       if (!empty($product_sub_img_urls)) {
                         foreach ($product_sub_img_urls as $sub_img_url) : ?>
                           <div class="swiper-slide cursor-pointer border border-[#eee] rounded overflow-hidden">
                             <img src="<?php echo $sub_img_url; ?>" alt="商品画像サムネイル"
-                              class="object-contain w-full h-auto transition-all duration-300" />
+                              class="aspect-square object-contain w-full h-auto transition-all duration-300" />
                           </div>
                         <?php endforeach; ?>
                       <?php } ?>
@@ -125,7 +125,7 @@ if (!is_wp_error($related_term_ids) && !empty($related_term_ids)) {
                 </div>
               </div>
             </div>
-            <div class="flex-1 pt-4 lg:pt-0 flex flex-col gap-4 overflow-overflow-y-scroll">
+            <div class="flex-1 pt-4 lg:pt-0 flex flex-col aspect-square gap-4 overflow-y-scroll product-detail-scroll">
               <h2 class="text-white text-[20px] lg:text-[24px] xl:text-[28px] font-bold mb-1"><?php echo $product_title; ?></h2>
               <span class="text-[#b40000] text-[18px] lg:text-[22px] xl:text-[24px] font-semibold"><?php echo $product_price; ?></span>
               <div class="nosima-wysiwyg text-white text-[14px] lg:text-[16px] xl:text-[18px] leading-relaxed space-y-2">
@@ -161,7 +161,7 @@ if (!is_wp_error($related_term_ids) && !empty($related_term_ids)) {
                         <a href="<?php echo esc_url(get_permalink($related->ID)); ?>">
                           <img src="<?php echo esc_url($related_img_url); ?>"
                             alt="<?php echo esc_attr(get_the_title($related->ID)); ?>"
-                            class="w-full object-cover rounded-md transition-transform duration-300" />
+                            class="w-full object-cover aspect-square rounded-md transition-transform duration-300" />
                         </a>
                       </div>
                     <?php endforeach; ?>
@@ -180,3 +180,5 @@ if (!is_wp_error($related_term_ids) && !empty($related_term_ids)) {
     </div>
   </div>
 </main>
+
+<?php get_footer(); ?>

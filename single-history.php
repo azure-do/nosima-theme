@@ -23,8 +23,8 @@ $next_post = get_next_post();
 ?>
 
 <?php get_template_part('templates/fv-all'); ?>
-<?php get_template_part('templates/page-info', null, array('title' => $history_title, 'description' => $history_description)); ?>
 <?php get_template_part('templates/breadcrumb'); ?>
+<?php get_template_part('templates/page-info', null, array('title' => $history_title, 'description' => $history_description)); ?>
 
 <main
   id="main" class="pt-0 xl:pb-9">

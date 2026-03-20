@@ -60,11 +60,21 @@ document.addEventListener("DOMContentLoaded", function () {
   const relatedProductsSwiper = new Swiper('#productImageSlider', {
     loop: true,
     zoom: true,
-    slidesPerView: 8,
-    spaceBetween: 8,
+    slidesPerView: 4,
+    spaceBetween: 4,
     pagination: {
       el: '.swiper-pagination',
       clickable: true,
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 4,
+        spaceBetween: 6
+      },
+      1024: {
+        slidesPerView: 8,
+        spaceBetween: 8
+      },
     },
     autoplay: {
       delay: 2500,

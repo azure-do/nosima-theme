@@ -193,9 +193,9 @@ $product_query_preserve = array_filter(array(
                     <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
                       stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
-                  <img src="<?php echo T_DIRE_URI; ?>/assets/images/mark01.webp" alt="マーク"
+                  <!-- <img src="<?php echo T_DIRE_URI; ?>/assets/images/mark01.webp" alt="マーク"
                     class="w-[16px] lg:w-[18px] xl:w-[22px] 2xl:w-[24px] hidden pointer-events-none select-none group-hover:opacity-100 opacity-0 group-hover:block transition-opacity duration-300"
-                    style="transform: rotateY(180deg);">
+                    style="transform: rotateY(180deg);"> -->
                   <?php echo $term->name; ?>
                 </li>
               </a>
