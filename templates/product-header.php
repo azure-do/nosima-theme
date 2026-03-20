@@ -1,6 +1,9 @@
 <?php
 $current_view = isset($_GET['view']) && $_GET['view'] === 'list' ? 'list' : 'grid';
-$current_sort = isset($_GET['sort']) ? sanitize_text_field(wp_unslash($_GET['sort'])) : '';
+$current_sort = isset($_GET['sort']) ? sanitize_text_field(wp_unslash($_GET['sort'])) : 'price_asc';
+if ($current_sort === '') {
+  $current_sort = 'price_asc';
+}
 $current_find = isset($_GET['find']) ? sanitize_text_field(wp_unslash($_GET['find'])) : '';
 $base_url = remove_query_arg(array('view', 'sort', 'find', 'paged'));
 $grid_url = add_query_arg('view', 'grid', $base_url);

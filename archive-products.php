@@ -9,7 +9,10 @@
 get_header();
 
 $products_view = isset($_GET['view']) && $_GET['view'] === 'list' ? 'list' : 'grid';
-$products_sort = isset($_GET['sort']) ? sanitize_text_field(wp_unslash($_GET['sort'])) : '';
+$products_sort = isset($_GET['sort']) ? sanitize_text_field(wp_unslash($_GET['sort'])) : 'price_asc';
+if ($products_sort === '') {
+    $products_sort = 'price_asc';
+}
 $products_find = isset($_GET['find']) ? sanitize_text_field(wp_unslash($_GET['find'])) : '';
 
 $products_args = array(

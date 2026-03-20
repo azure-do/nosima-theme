@@ -54,7 +54,36 @@ $history_query = new WP_Query($history_args);
         <?php get_template_part('templates/sidebar'); ?>
         <div id="content" class="flex-1 md:max-w-[680px] lg:max-w-full mx-auto">
             <div class="w-full px-7 md:px-0">
-                <div class="flex flex-col items-center gap-1">
+                <div class="w-full">
+                    <div class="flex flex-col items-center gap-1">
+                        <img src="<?php echo T_DIRE_URI; ?>/assets/images/mark01.webp" alt="マーク"
+                            class="w-[40px] lg:w-[50px] xl:w-[60px] pointer-events-none select-none">
+                        <h3 class="text-[24px] lg:text-[28px] xl:text-[32px] 2xl:text-[36px] text-white font-medium tracking-wide">
+                            制作例</h3>
+                    </div>
+                    <div
+                        class="w-full grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-6 lg:mt-8 xl:mt-10 p-4 lg:p-6 xl:p-10 bg-[url('<?php echo T_DIRE_URI; ?>/assets/images/bg-product-example.webp')] bg-cover bg-center">
+                        <?php if ($history_query->have_posts()) : ?>
+                            <?php while ($history_query->have_posts()) : $history_query->the_post(); ?>
+                                <?php
+                                $post_id = get_the_ID();
+                                $post_title = get_the_title($post_id);
+                                ?>
+                                <a href="<?php echo esc_url(get_permalink($post_id)); ?>">
+                                    <button
+                                        class="w-full flex items-center gap-2 xl:gap-3 text-white text-[12px] lg:text-[14px] xl:text-[16px] py-2 lg:py-4 xl:py-6 px-3 xl:px-5 border border-[#818181] bg-black/40 hover:bg-black/80 transition">
+                                        <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
+                                            <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                        <?php echo $post_title ?>
+                                    </button>
+                                </a>
+                            <?php endwhile; ?>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center gap-1 pt-12 lg:pt-16 xl:pt-20">
                     <img src="<?php echo T_DIRE_URI; ?>/assets/images/mark01.webp" alt="マーク"
                         class="w-[40px] lg:w-[50px] xl:w-[60px] pointer-events-none select-none">
                     <h3 class="text-[24px] lg:text-[28px] xl:text-[32px] 2xl:text-[36px] text-white font-medium tracking-wide">
@@ -115,35 +144,7 @@ $history_query = new WP_Query($history_args);
                     <?php endif; ?>
                 </div>
             </div>
-            <div class="w-full pt-12 lg:pt-16 xl:pt-20">
-                <div class="flex flex-col items-center gap-1">
-                    <img src="<?php echo T_DIRE_URI; ?>/assets/images/mark01.webp" alt="マーク"
-                        class="w-[40px] lg:w-[50px] xl:w-[60px] pointer-events-none select-none">
-                    <h3 class="text-[24px] lg:text-[28px] xl:text-[32px] 2xl:text-[36px] text-white font-medium tracking-wide">
-                        制作例</h3>
-                </div>
-                <div
-                    class="w-full grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-6 lg:mt-8 xl:mt-10 p-4 lg:p-6 xl:p-10 bg-[url('<?php echo T_DIRE_URI; ?>/assets/images/bg-product-example.webp')] bg-cover bg-center">
-                    <?php if ($history_query->have_posts()) : ?>
-                        <?php while ($history_query->have_posts()) : $history_query->the_post(); ?>
-                            <?php
-                            $post_id = get_the_ID();
-                            $post_title = get_the_title($post_id);
-                            ?>
-                            <a href="<?php echo esc_url(get_permalink($post_id)); ?>">
-                                <button
-                                    class="w-full flex items-center gap-2 xl:gap-3 text-white text-[12px] lg:text-[14px] xl:text-[16px] py-2 lg:py-4 xl:py-6 px-3 xl:px-5 border border-[#818181] bg-black/40 hover:bg-black/80 transition">
-                                    <svg class="w-[9px] text-[#b40000]" viewBox="0 0 10 16" xmlns="http://www.w3.org/2000/svg">
-                                        <polyline points="0,2 6,8 0,14" fill="none" stroke="currentColor" stroke-width="3"
-                                            stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                    <?php echo $post_title ?>
-                                </button>
-                            </a>
-                        <?php endwhile; ?>
-                    <?php endif; ?>
-                </div>
-            </div>
+
         </div>
     </div>
 </main>
