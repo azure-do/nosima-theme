@@ -32,12 +32,15 @@ function nosima_add_product_category_custom_field($term)
 {
   $selected = get_term_meta($term->term_id, 'custom_towel_type', true);
   $category_title = get_term_meta($term->term_id, 'category_title', true);
+  $category_active = get_term_meta($term->term_id, 'category_active', true);
+  $is_active = ($category_active === '' || $category_active === '1');
   $options = array(
     'standard_towel'   => '定番タオル',
     'sp_color_towel'   => 'SPカラータオル',
     'flat_weave_towel' => '平織りタオル',
     'cheering_goods'   => '応援グッズ',
     'victory_costume'  => '勝鬨衣装',
+    'other_towel'      => 'その他',
   );
 ?>
   <tr class="form-field">
@@ -58,6 +61,15 @@ function nosima_add_product_category_custom_field($term)
       <input name="category_title" id="category_title" type="text" value="<?php echo esc_attr($category_title); ?>" class="regular-text" />
     </td>
   </tr>
+  <tr class="form-field">
+    <th scope="row"><label for="category_active">表示状態</label></th>
+    <td>
+      <label>
+        <input type="checkbox" name="category_active" id="category_active" value="1" <?php checked($is_active); ?> />
+        有効（フロントに表示する）
+      </label>
+    </td>
+  </tr>
 <?php
 }
 add_action('product_category_edit_form_fields', 'nosima_add_product_category_custom_field', 10, 1);
@@ -70,6 +82,7 @@ add_action('product_category_add_form_fields', function ($taxonomy) {
     'flat_weave_towel' => '平織りタオル',
     'cheering_goods'   => '応援グッズ',
     'victory_costume'  => '勝鬨衣装',
+    'other_towel'      => 'その他',
   );
 ?>
   <div class="form-field">
@@ -86,6 +99,12 @@ add_action('product_category_add_form_fields', function ($taxonomy) {
     <label for="category_title">タイトル</label>
     <input name="category_title" id="category_title" type="text" value="" class="regular-text" />
   </div>
+  <div class="form-field">
+    <label for="category_active">
+      <input type="checkbox" name="category_active" id="category_active" value="1" checked />
+      有効（フロントに表示する）
+    </label>
+  </div>
 <?php
 }, 10, 1);
 
@@ -98,6 +117,8 @@ function nosima_save_product_category_custom_field($term_id)
   if (isset($_POST['category_title'])) {
     update_term_meta($term_id, 'category_title', sanitize_text_field($_POST['category_title']));
   }
+  $active = (isset($_POST['category_active']) && $_POST['category_active'] === '1') ? '1' : '0';
+  update_term_meta($term_id, 'category_active', $active);
 }
 add_action('created_product_category', 'nosima_save_product_category_custom_field', 10, 1);
 add_action('edited_product_category', 'nosima_save_product_category_custom_field', 10, 1);
@@ -111,6 +132,7 @@ function nosima_product_category_custom_column_add($columns)
     if ($key === 'name') {
       $new_columns['custom_towel_type'] = '商品の種類 ';
       $new_columns['category_title'] = 'タイトル';
+      $new_columns['category_active'] = '表示状態';
     }
   }
   return $new_columns;
@@ -128,6 +150,7 @@ function nosima_product_category_custom_column_show($out, $column_name, $term_id
       'flat_weave_towel' => '平織りタオル',
       'cheering_goods'   => '応援グッズ',
       'victory_costume'  => '勝鬨衣装',
+      'other_towel'      => 'その他',
     );
     if (!empty($value)) {
       return isset($labels[$value]) ? esc_html($labels[$value]) : esc_html($value);
@@ -142,6 +165,13 @@ function nosima_product_category_custom_column_show($out, $column_name, $term_id
     } else {
       return '<span style="color:#aaa;">-</span>';
     }
+  }
+  if ($column_name === 'category_active') {
+    $value = get_term_meta($term_id, 'category_active', true);
+    $is_active = ($value === '' || $value === '1');
+    return $is_active
+      ? '<span style="color:#2e7d32;font-weight:600;">有効</span>'
+      : '<span style="color:#999;">無効</span>';
   }
   return $out;
 }
@@ -188,13 +218,21 @@ function nosima_get_image_urls_from_html($html)
 // Usage: $term->custom_towel_type will be populated
 add_filter('get_terms', function ($terms, $taxonomies, $args, $term_query) {
   if (is_array($taxonomies) && in_array('product_category', $taxonomies)) {
+    $filtered = array();
     foreach ($terms as $term) {
       if (!is_object($term)) {
         continue;
       }
       $term->custom_towel_type = get_term_meta($term->term_id, 'custom_towel_type', true);
       $term->category_title   = get_term_meta($term->term_id, 'category_title', true);
+      $term->category_active  = get_term_meta($term->term_id, 'category_active', true);
+      $is_active = ($term->category_active === '' || $term->category_active === '1');
+      if (!is_admin() && !$is_active) {
+        continue;
+      }
+      $filtered[] = $term;
     }
+    return $filtered;
   }
   return $terms;
 }, 10, 4);
@@ -206,7 +244,8 @@ add_filter('get_term', function ($term, $taxonomy) {
   return $term;
 }, 10, 2);
 
-function nosima_get_breadcrumb() {
+function nosima_get_breadcrumb()
+{
   $items = array();
   $items[] = array('label' => 'ホーム', 'url' => home_url('/'));
 

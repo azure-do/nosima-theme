@@ -282,4 +282,32 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   }
+
+  const privacyLink = document.getElementById("privacyPolicyLink");
+  const privacyModal = document.getElementById("privacyPolicyModal");
+  const privacyClose = document.getElementById("privacyPolicyClose");
+  const privacyBackdrop = document.getElementById("privacyPolicyBackdrop");
+  if (privacyLink && privacyModal) {
+    function openPrivacyModal() {
+      privacyModal.classList.remove("hidden");
+      privacyModal.classList.add("flex");
+      document.body.style.overflow = "hidden";
+    }
+    function closePrivacyModal() {
+      privacyModal.classList.add("hidden");
+      privacyModal.classList.remove("flex");
+      document.body.style.overflow = "";
+    }
+    privacyLink.addEventListener("click", function (e) {
+      e.preventDefault();
+      openPrivacyModal();
+    });
+    if (privacyClose) privacyClose.addEventListener("click", closePrivacyModal);
+    if (privacyBackdrop) privacyBackdrop.addEventListener("click", closePrivacyModal);
+    document.addEventListener("keydown", function (e) {
+      if (!privacyModal.classList.contains("hidden") && e.key === "Escape") {
+        closePrivacyModal();
+      }
+    });
+  }
 });
